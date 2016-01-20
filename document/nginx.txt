@@ -2,7 +2,7 @@ server {
     listen      80;
     server_name utility;
 
-    root        /opt/workspace/product-vh/public;
+    root        /var/www/utility/public;
 
     index index.php index.html index.htm;
 
@@ -27,7 +27,7 @@ server {
     }
 
     location ~* ^/(css|img|js|flv|swf|download)/(.+)$ {
-        root /opt/workspace/product-vh/public;
+        root /var/www/utility/public;
     }
 
     location ~ /\.ht {

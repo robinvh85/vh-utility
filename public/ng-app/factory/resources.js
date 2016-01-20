@@ -9,6 +9,19 @@ angular.module("app").factory("resources", function($resource) {
         method: "GET",
 		url: apiUrl + "/index/list"
       },
-    })
+    }),
+	words: $resource(apiUrl + "/words/list", {}, {
+      get: {
+        method: "GET"
+      },
+	  save: {
+        method: "PUT",
+        url: apiUrl + "/words/save"
+      },
+      create: {
+        method: "POST",
+        url: apiUrl + "/words/create"
+      },
+    }),
   };
 });

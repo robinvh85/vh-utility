@@ -12,7 +12,7 @@
         <script src="/js/bootstrap.min.js"></script>
         <script src="/plugins/angular/js/angular.min.js"></script>
 		<script>
-			angular.module("app", ["ngResource"]).config(function($interpolateProvider) {
+			angular.module("app", ["ngResource", "ui.bootstrap"]).config(function($interpolateProvider) {
 				$interpolateProvider.startSymbol('[[');
 				$interpolateProvider.endSymbol(']]');
 			});	
@@ -24,4 +24,5 @@
 	
 	<script src="/plugins/angular/js/angular-resource.min.js"></script>
 	<script src="/ng-app/factory/resources.js"></script>
+	<script src="/plugins/angular/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
 </html>

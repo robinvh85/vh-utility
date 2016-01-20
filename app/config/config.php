@@ -10,8 +10,8 @@ return new \Phalcon\Config(array(
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
         'username'    => 'root',
-        'password'    => '',
-        'dbname'      => 'vh-utility',
+        'password'    => 'root',
+        'dbname'      => 'vh_utility',
         'charset'     => 'utf8',
     ),
     'application' => array(

@@ -14,13 +14,17 @@
 			<tr> 
 				<th style="width:50px;">ID</th> 
 				<th>Text</th> 
-				<th></th>
+				<th>Meaning</th>
+				<th>Audio</th>
+				<th></id>
 			</tr> 
 		</thead> 
 		<tbody> 
 		<tr ng-repeat="item in dataList"> 
 			<td>[[ item.id ]]</td>
 			<td>[[ item.text ]]</td>
+			<td>[[ item.meaning ]]</td>
+			<td>[[ item.audioPath ]]</td>
 			<td><a href="#" ng-click="showEdit(item)">Edit</a></td>
 		</tr> 
 		</tbody> 
@@ -48,6 +52,12 @@
 				<label for="meaning" class="col-sm-2 control-label">Meaning</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="meaning" ng-model="currentObj.meaning">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="audioPath" class="col-sm-2 control-label">Audio</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="audioPath" ng-model="currentObj.audioPath">
 				</div>
 			  </div>
 			</form>

@@ -4,15 +4,10 @@ angular.module("app").factory("resources", function($resource) {
   host = "";
   apiUrl = host + "";
   return {
-    index: $resource(apiUrl + "/index", {}, {
-      get: {
-        method: "GET",
-		url: apiUrl + "/index/list"
-      },
-    }),
 	words: $resource(apiUrl + "/words/list", {}, {
-      get: {
-        method: "GET"
+      list: {
+        method: "POST",
+		url: apiUrl + "/words/list"
       },
 	  save: {
         method: "PUT",

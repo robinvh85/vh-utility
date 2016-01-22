@@ -2,12 +2,14 @@
 
 class WordsController extends ControllerBase
 {
-    /**
-     * Index action
-     */
+	public function initialize()
+	{
+		$this->tag->setTitle("Words");
+	}
+
     public function indexAction()
     {
-
+		
     }
 
 	public function adminAction()
@@ -17,7 +19,15 @@ class WordsController extends ControllerBase
 	
     public function listAction()
     {
-        $list = Words::find();
+		$params = json_decode(file_get_contents('php://input'));		
+		
+		if($params == null){
+			$list = Words::find();			
+		} else {
+			$category = $params -> category;		
+			$list = Words::find("category='$category'");
+		}
+		
         $this->view->disable();
 		
         echo json_encode(array("data" => $list->toArray()));

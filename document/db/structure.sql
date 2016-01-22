@@ -7,3 +7,9 @@ CREATE TABLE `words` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `words`
+ADD COLUMN `category`  varchar(50) NULL AFTER `tags`;
+
+ALTER TABLE `words`
+ADD UNIQUE INDEX `text_unique_idx` (`text`) ;
+

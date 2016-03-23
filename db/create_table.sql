@@ -20,6 +20,16 @@ CREATE TABLE `site_monitor` (
   UNIQUE KEY `unique_siteId_monitor` (`site_id`,`monitor`)
 ) DEFAULT CHARSET=utf8;
 
+CREATE TABLE `unknow_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `monitor` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_done` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_url` (`url`)
+) DEFAULT CHARSET=utf8;
+
+
 
 
 ALTER TABLE `sites`

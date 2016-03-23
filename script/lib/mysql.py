@@ -63,9 +63,11 @@ def executeScalar(query):
 		print query
 		cursor.execute(query)	   
 		value = cursor.fetchone()
-		result = value[0]
+		print("value: ", value)
+		if value != None:
+			result = value[0]
 	except Exception as e: 
-		print(e)
+		print("mysql error: ", e)
 	
 	return result
 	

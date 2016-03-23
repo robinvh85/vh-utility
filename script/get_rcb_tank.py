@@ -32,20 +32,37 @@ def getSiteUrl(id):
 		result = result.split("/")[0]
 	except :
 		print("========== ERROR ===========")
+		insertUnknowSite(urlRequest, MONITOR)
 	
 	return result
 
 def insertSite(obj):
 	query = """
-		INSERT IGNORE INTO sites(url, name) values ('{0}', '{1}')
-	""".format(obj['url'], obj['name'])
+		SELECT id FROM sites WHERE url = '{0}'
+	""".format(obj['url'])
 	
-	return mysql.executeInsert(query)
+	id = mysql.executeScalar(query)
+	
+	if id == None:
+		query = """
+			INSERT INTO sites(url) values ('{0}')
+		""".format(obj['url'])
+		
+		id = mysql.executeInsert(query)
+		
+	return id 
 
 def insertSiteMonitor(obj, monitor):
 	query = """
 		INSERT IGNORE INTO site_monitor(site_id, monitor, ref_site_id, ref_site_url) values ({0}, '{1}', {2}, '{3}')
 	""".format(obj['siteId'], monitor, obj['id'], obj['siteRCBUrl'])
+	
+	return mysql.executeNoneQuery(query)
+
+def insertUnknowSite(url, monitor):
+	query = """
+		INSERT IGNORE INTO unknow_sites(url, monitor) values ('{0}', '{1}')
+	""".format(url, monitor)
 	
 	return mysql.executeNoneQuery(query)
 	
@@ -67,7 +84,6 @@ def main():
 			obj['siteId'] = ""
 			obj['siteRCBUrl'] = ""
 			
-			print("URL:", obj['url'])
 			if obj['url'] != '':
 				siteId = insertSite(obj)
 				obj['siteId'] = siteId
@@ -75,10 +91,10 @@ def main():
 				
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				
-	#		siteList.append(obj)
+			siteList.append(obj)
 					
-	#for item in siteList:
-	#	insertSiteMonitor(item, MONITOR)
+	for item in siteList:
+		insertSiteMonitor(item, MONITOR)
 	
 	util.logNow("END AT")
 		

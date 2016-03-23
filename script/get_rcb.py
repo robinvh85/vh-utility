@@ -17,7 +17,7 @@ def getId(url):
 	id = arr1[0]
 	return id
 
-def getSiteUrl(urlRequest):
+def getSiteUrl(urlRequest, monitor):
 	result = ""
 	print("REQUEST: {0}".format(urlRequest))
 	try:
@@ -31,15 +31,25 @@ def getSiteUrl(urlRequest):
 		result = result.split("/")[0]
 	except :
 		print("========== ERROR ===========")
+		insertUnknowSite(urlRequest, MONITOR)
 	
 	return result
 
 def insertSite(obj):
 	query = """
-		INSERT IGNORE INTO sites(url) values ('{0}')
+		SELECT id FROM sites WHERE url = '{0}'
 	""".format(obj['url'])
 	
-	return mysql.executeInsert(query)
+	id = mysql.executeScalar(query)
+	
+	if id == None:
+		query = """
+			INSERT INTO sites(url) values ('{0}')
+		""".format(obj['url'])
+		
+		id = mysql.executeInsert(query)
+		
+	return id 
 
 def insertSiteMonitor(obj, monitor):
 	query = """
@@ -47,12 +57,18 @@ def insertSiteMonitor(obj, monitor):
 	""".format(obj['siteId'], monitor, obj['id'], obj['siteRCBUrl'])
 	
 	return mysql.executeNoneQuery(query)
+
+def insertUnknowSite(url, monitor):
+	query = """
+		INSERT IGNORE INTO unknow_sites(url, monitor) values ('{0}', '{1}')
+	""".format(url, monitor)
 	
-def main():	
-	print "\n========== RUN get_rcb.py ============"
-	util.logNow("START AT")
-	
-	d = pq(url=URL)
+	return mysql.executeNoneQuery(query)
+
+def getRCBHyipScope():
+	monitor = "hyipscope.org"
+	rcb_url = "http://{0}/allrcb.html".format(monitor)
+	d = pq(url=rcb_url)
 	tables = d("table tr td font a")
 	siteList = []
 	
@@ -60,10 +76,37 @@ def main():
 		if item.text:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
-			obj['url'] = getSiteUrl(item.get("href"))			
+			obj['url'] = getSiteUrl(item.get("href"), monitor)		
 			obj['siteId'] = ""
 			obj['siteRCBUrl'] = ""
 				
+			if obj['url'] != '':
+				siteId = insertSite(obj)
+				obj['siteId'] = siteId
+				obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+				
+				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
+				
+			siteList.append(obj)
+				
+	for item in siteList:
+		insertSiteMonitor(item, monitor)
+
+def getRCBTank():
+	monitor = "hyiptank.net"
+	rcb_url = "http://{0}/allrcb.html".format(monitor)
+	d = pq(url=rcb_url)
+	tables = d("table.listbody tr td[align='right'] a")
+	siteList = []
+	
+	for index, item in enumerate(tables):
+		if index % 2 == 0 and index < len(tables) - 2:
+			obj = {}
+			obj['id'] = getId(item.get("href"))
+			obj['url'] = getSiteUrl(obj['id'])
+			obj['siteId'] = ""
+			obj['siteRCBUrl'] = ""
+			
 			if obj['url'] != '':
 				siteId = insertSite(obj)
 				obj['siteId'] = siteId
@@ -72,16 +115,21 @@ def main():
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				
 			siteList.append(obj)
-				
+					
 	for item in siteList:
 		insertSiteMonitor(item, MONITOR)
+		
+def main():	
+	print "\n========== RUN get_rcb.py ============"
+	util.logNow("START AT")
+	
+	getRCBHyipScope()
 	
 	util.logNow("END AT")
-		
+
 ############## Main #############
 datetimeNow = util.getDatetimeNow()
-MONITOR = "hyipscope.org"
-URL = "http://{0}/allrcb.html".format(MONITOR)
+
 
 mysql.connect()
 

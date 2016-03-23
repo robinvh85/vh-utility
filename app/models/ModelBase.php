@@ -1,8 +1,5 @@
 <?php
 
-namespace Backend\Models;
-
-
 class ModelBase extends \Phalcon\Mvc\Model
 {
     protected static function getManager()

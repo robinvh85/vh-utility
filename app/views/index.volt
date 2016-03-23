@@ -11,6 +11,7 @@
         <script src="/js/jquery-2.1.4.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/plugins/angular/js/angular.min.js"></script>
+		<script src="/js/moment.min.js"></script>
 		<script>
 			angular.module("app", ["ngResource", "ui.bootstrap"]).config(function($interpolateProvider) {
 				$interpolateProvider.startSymbol('[[');

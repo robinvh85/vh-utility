@@ -18,5 +18,19 @@ angular.module("app").factory("resources", function($resource) {
         url: apiUrl + "/words/create"
       },
     }),
+	hyips: $resource(apiUrl + "/hyips/list", {}, {
+      list: {
+        method: "POST",
+		url: apiUrl + "/hyips/list"
+      },
+	  updateSite: {
+        method: "POST",
+		url: apiUrl + "/hyips/updateSite"
+      },
+	  updateMonitorSite: {
+        method: "POST",
+		url: apiUrl + "/hyips/updateMonitorSite"
+      },	  
+    }),
   };
 });

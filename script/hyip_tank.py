@@ -11,7 +11,7 @@ def getId(url):
 	id = arr[len(arr) - 1]
 	return id
 
-def getSiteUrl(id, monitor):
+def getSiteUrl(id, monitor, rcbUrl):
 	urlRequest = "http://hyiptank.net/hyip-{0}.html".format(id)
 	result = ""
 	print("REQUEST: {0}".format(urlRequest))
@@ -27,11 +27,11 @@ def getSiteUrl(id, monitor):
 		result = result.split("/")[0]
 	except :
 		print("========== ERROR ===========")
-		common.insertUnknowSite(urlRequest, monitor)
+		common.insertUnknowSite(rcbUrl, monitor)
 	
 	return result
 	
-def getRcb(monitor):	
+def getRcb(monitor):
 	print("hyip_tank.getRcb()")
 
 	rcb_url = "http://{0}/allrcb.html".format(monitor)
@@ -43,14 +43,15 @@ def getRcb(monitor):
 		if index % 2 == 0 and index < len(tables) - 2:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
-			obj['url'] = getSiteUrl(obj['id'], monitor)
+			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+			obj['url'] = getSiteUrl(obj['id'], monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 			obj['siteRCBUrl'] = ""
 			
 			if obj['url'] != '':
 				siteId = common.insertSite(obj)
 				obj['siteId'] = siteId
-				obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+				
 				
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				

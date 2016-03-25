@@ -21,6 +21,13 @@ class HyipsController extends ControllerBase
         echo json_encode(array("data" => $list->toArray()));
     }
 
+	public function listUnknowAction()
+    {
+		$list = UnknowSites::find("is_done = 0");	
+        $this->view->disable();
+        echo json_encode(array("data" => $list->toArray()));		
+    }
+	
 	public function updateSiteAction()
     {
         $this->view->disable();
@@ -29,6 +36,20 @@ class HyipsController extends ControllerBase
         $model->is_scam = intval($params->is_scam);
         $model->type = $params->type;
 		$model->start_at = $params->start_at;
+		
+        if($model->save()){
+            echo json_encode(array("status" => "OK"));
+        } else {
+            echo json_encode(array("status" => "NG"));
+        }
+    }
+	
+	public function updateUnknowSiteAction()
+    {
+        $this->view->disable();
+		$params = json_decode(file_get_contents('php://input'));
+        $model = UnknowSites::findFirst($params->id);
+        $model->is_done = 1;
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));
@@ -56,22 +77,25 @@ class HyipsController extends ControllerBase
     public function createAction()
     {
         $this->view->disable();
-        $status = "NG";
+        $status = "OK";
 
         $params = json_decode(file_get_contents('php://input'));
-
-        $model = new Words();
-
-        $model->text = $params -> text;
-        $model->meaning = $params -> meaning;
-        $model->subtitle = $params -> subtitle;
-		$model->audioPath = $params -> audioPath;
-		$model->tags = $params -> tags;
 		
-        if($model->save()) {
-            $status = "OK";
-        }
+		if(Sites::findFirst("url='$params->url'") == null){
+			$model = new Sites();
+			$model->url = $params -> url;
+			$model->save();
 
+			$monitorModel = new SiteMonitors();
+			$monitorModel->site_id = $model->id;
+			$monitorModel->monitor = $params -> monitor;
+			$monitorModel->ref_site_id = $params -> ref_site_id;
+			$monitorModel->ref_site_url = "http://$params->monitor/rcb-$params->ref_site_id.html";
+			$monitorModel->save();
+		} else {
+			$status = "NG";
+		}
+		        
         echo json_encode(array("status" => $status));
     }
 }

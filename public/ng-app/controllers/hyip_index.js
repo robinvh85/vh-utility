@@ -1,7 +1,9 @@
 angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $interval, resources) {
 
 	$scope.itemList = [];
+	$scope.itemUnknowList = [];
 	$scope.typeList = ["1d", "3d", "7d", "15d", "30d", ">30d"];
+	$scope.newItem = {}
 	
 	$scope.startAtChange = function(index){
 		console.log(index);
@@ -37,6 +39,21 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 		});	
 	}
 
+	$scope.updateUnknowSite = function(item){
+		resources.hyips.updateUnknowSite(item).$promise.then(function(res) {
+			console.log("Updated UnknowSite", res);
+		});	
+	}
+	
+	
+	$scope.addNewItem = function(){
+		resources.hyips.create($scope.newItem).$promise.then(function(res) {
+			console.log("Updated Site", res);
+			$scope.newItem = {};
+			refreshData();
+		});	
+	}
+	
 	$scope.calLifeTime = function(dateString){
 		if(!dateString) return "";
 		
@@ -53,11 +70,18 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 		
 		resources.hyips.list(params).$promise.then(function(res) {
 			$scope.itemList = res.data;	
+		});			
+	}	
+	
+	function refreshUnknowSiteData(){				
+		resources.hyips.listUnknow().$promise.then(function(res) {
+			$scope.itemUnknowList = res.data;	
 		});	
 	}	
 	
 	$scope.init = function(){
-		refreshData();		
+		refreshData();
+		refreshUnknowSiteData();
 	}
 	
 	$scope.init();

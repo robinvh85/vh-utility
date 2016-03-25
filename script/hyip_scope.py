@@ -12,7 +12,7 @@ def getId(url):
 	id = arr1[0]
 	return id
 
-def getSiteUrl(urlRequest, monitor):
+def getSiteUrl(urlRequest, monitor, rcbUrl):
 	result = ""
 	print("REQUEST: {0}".format(urlRequest))
 	try:
@@ -26,7 +26,7 @@ def getSiteUrl(urlRequest, monitor):
 		result = result.split("/")[0]
 	except :
 		print("========== ERROR ===========")
-		common.insertUnknowSite(urlRequest, monitor)
+		common.insertUnknowSite(rcbUrl, monitor)
 	
 	return result
 
@@ -42,14 +42,15 @@ def getRcb(monitor):
 		if item.text:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
-			obj['url'] = getSiteUrl(item.get("href"), monitor)		
+			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
-			obj['siteRCBUrl'] = ""
+			
 				
 			if obj['url'] != '':
 				siteId = common.insertSite(obj)
 				obj['siteId'] = siteId
-				obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+				
 				
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				

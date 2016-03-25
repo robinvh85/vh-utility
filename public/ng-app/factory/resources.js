@@ -23,6 +23,10 @@ angular.module("app").factory("resources", function($resource) {
         method: "POST",
 		url: apiUrl + "/hyips/list"
       },
+	  listUnknow: {
+        method: "POST",
+		url: apiUrl + "/hyips/listUnknow"
+      },
 	  updateSite: {
         method: "POST",
 		url: apiUrl + "/hyips/updateSite"
@@ -30,6 +34,14 @@ angular.module("app").factory("resources", function($resource) {
 	  updateMonitorSite: {
         method: "POST",
 		url: apiUrl + "/hyips/updateMonitorSite"
+      },
+	  updateUnknowSite: {
+        method: "POST",
+		url: apiUrl + "/hyips/updateUnknowSite"
+      },
+	  create: {
+        method: "POST",
+		url: apiUrl + "/hyips/create"
       },	  
     }),
   };

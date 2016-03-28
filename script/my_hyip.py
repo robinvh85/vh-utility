@@ -31,19 +31,19 @@ def getSiteUrl(urlRequest, monitor, rcbUrl):
 	return result
 
 def getRcb(monitor):
-	print("hyip_stop.getRcb()")
+	print("my_hyip.getRcb()")
 	
 	rcb_url = "http://{0}/new".format(monitor)
 	d = pq(url=rcb_url)
-	list = d("a.joinnw")
+	list = d(".nameprogram a")
 	siteList = []
 	
 	for item in list:
 		obj = {}
 		obj['id'] = getId(item.get("href"))
-		
-		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:		
-			obj['siteRCBUrl'] = "http://{0}/details/aj/rcb/lid/{1}/".format(monitor, obj['id'])
+
+		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:
+			obj['siteRCBUrl'] = "http://{0}/refback/lid/{1}/".format(monitor, obj['id'])
 			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
@@ -78,6 +78,6 @@ def checkRcb(monitor):
 				common.setPaid(item[0])
 	
 def run():
-	MONITOR = "hyipstop.com"
+	MONITOR = "myhyips.net"
 	getRcb(MONITOR)
 	#checkRcb(MONITOR)

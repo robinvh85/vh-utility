@@ -7,6 +7,7 @@ class SiteMonitors extends ModelBase
     public $ref_site_id;
     public $ref_site_url;	
 	public $is_paid;
+	public $note;
 
     /**
      * Returns table name mapped in the model.
@@ -41,13 +42,21 @@ class SiteMonitors extends ModelBase
     }
 	
 	public static function getList(){
-        $phql = "SELECT sm.id, sm.monitor, sm.ref_site_url, sm.is_paid, sm.site_id, s.url, s.is_scam, s.start_at, s.type
+        $phql = "SELECT sm.id, sm.monitor, sm.ref_site_url, sm.site_id, sm.note, s.id, s.url, s.is_scam, s.start_at, s.type
 			FROM SiteMonitors sm
 			JOIN Sites s ON sm.site_id = s.id AND s.is_scam = 0
-			ORDER BY s.start_at desc";
+			ORDER BY s.start_at desc, s.id ASC";
 
         $list = self::getManager()->executeQuery($phql);
 
         return $list;
     }
+	
+	public static function getRcbLink($monitor, $refSiteIdid){
+		if($monitor == "hyipstop.com"){
+			return "http://$monitor/details/aj/rcb/lid/$refSiteIdid/";
+		} else {
+			return "http://$monitor/rcb-$refSiteIdid.html";
+		}
+	}
 }

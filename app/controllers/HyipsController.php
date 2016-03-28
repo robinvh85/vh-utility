@@ -6,7 +6,7 @@ class HyipsController extends ControllerBase
 	{
 		$this->tag->setTitle("HYIP");
 	}
-
+	
     public function indexAction()
     {
 		
@@ -62,10 +62,8 @@ class HyipsController extends ControllerBase
     {
         $this->view->disable();
 		$params = json_decode(file_get_contents('php://input'));
-        $model = MonitorSites::findFirst($params->id);
-        $model->is_scam = intval($params->is_scam);
-        $model->type = $params->type;
-		$model->start_at = $params->start_at;
+        $model = SiteMonitors::findFirst($params->id);
+        $model->note = $params->note;
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));
@@ -80,19 +78,21 @@ class HyipsController extends ControllerBase
         $status = "OK";
 
         $params = json_decode(file_get_contents('php://input'));
+		$model = Sites::findFirst("url='$params->url'");
 		
-		if(Sites::findFirst("url='$params->url'") == null){
+		if($model == null){
 			$model = new Sites();
 			$model->url = $params -> url;
-			$model->save();
-
-			$monitorModel = new SiteMonitors();
-			$monitorModel->site_id = $model->id;
-			$monitorModel->monitor = $params -> monitor;
-			$monitorModel->ref_site_id = $params -> ref_site_id;
-			$monitorModel->ref_site_url = "http://$params->monitor/rcb-$params->ref_site_id.html";
-			$monitorModel->save();
-		} else {
+			$model->save();			
+		}
+		
+		$monitorModel = new SiteMonitors();
+		$monitorModel->site_id = $model->id;
+		$monitorModel->monitor = $params -> monitor;
+		$monitorModel->ref_site_id = $params -> ref_site_id;
+		$monitorModel->ref_site_url = SiteMonitors::getRcbLink($params->monitor, $params->ref_site_id);
+		
+		if(!$monitorModel->save()){
 			$status = "NG";
 		}
 		        

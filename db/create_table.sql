@@ -35,5 +35,8 @@ CREATE TABLE `unknow_sites` (
 ALTER TABLE `sites`
 DROP COLUMN `name`;
 
+ALTER TABLE `site_monitor`
+ADD COLUMN `note`  varchar(50) NULL AFTER `is_paid`;
+
 
 

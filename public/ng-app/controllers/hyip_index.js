@@ -13,18 +13,11 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 		console.log(item);
 	}
 	
-	/*
 	$scope.updateMonitorSite = function(item){
-		
-		var params = {
-			id : item.id,
-		};
-		
-		resources.hyips.updateMonitorSite(params).$promise.then(function(res) {
+		resources.hyips.updateMonitorSite(item).$promise.then(function(res) {
 			console.log("Updated Site", res);
 		});	
 	}
-	*/
 	
 	$scope.updateSite = function(item){
 		var params = {

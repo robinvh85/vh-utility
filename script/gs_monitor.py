@@ -12,8 +12,9 @@ def getId(url):
 	
 	return id
 
-def getSiteUrl(urlRequest, monitor, rcbUrl):
+def getSiteUrl(refSiteId, monitor, rcbUrl):
 	result = ""
+	urlRequest = "http://{0}/go/{1}/".format(monitor, refSiteId)
 	print("REQUEST: {0}".format(urlRequest))
 	try:
 		req = urllib2.urlopen(urlRequest, timeout=30)
@@ -31,11 +32,11 @@ def getSiteUrl(urlRequest, monitor, rcbUrl):
 	return result
 
 def getRcb(monitor):
-	print("hyip_stop.getRcb()")
+	print("gs_monitor.getRcb()")
 	
-	rcb_url = "http://{0}/new".format(monitor)
+	rcb_url = "http://{0}/?a=showblock&block=newhyips".format(monitor)
 	d = pq(url=rcb_url)
-	list = d("a.joinnw")
+	list = d(".newlistingslink")
 	siteList = []
 	
 	for item in list:
@@ -43,8 +44,8 @@ def getRcb(monitor):
 		obj['id'] = getId(item.get("href"))
 		
 		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:		
-			obj['siteRCBUrl'] = "http://{0}/details/aj/rcb/lid/{1}/".format(monitor, obj['id'])
-			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
+			obj['siteRCBUrl'] = "http://{0}//refback/{1}/".format(monitor, obj['id'])
+			obj['url'] = getSiteUrl(obj['id'], monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
 			if obj['url'] != '':
@@ -78,6 +79,6 @@ def checkRcb(monitor):
 				common.setPaid(item[0])
 	
 def run():
-	MONITOR = "hyipstop.com"
+	MONITOR = "gsmonitor.org"
 	getRcb(MONITOR)
 	#checkRcb(MONITOR)

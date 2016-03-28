@@ -49,8 +49,11 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 	$scope.addNewItem = function(){
 		resources.hyips.create($scope.newItem).$promise.then(function(res) {
 			console.log("Updated Site", res);
-			$scope.newItem = {};
-			refreshData();
+			
+			if(res.status == "OK"){
+				$scope.newItem = {};
+				refreshData();
+			}
 		});	
 	}
 	

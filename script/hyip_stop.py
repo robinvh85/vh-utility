@@ -7,9 +7,9 @@ from pyquery import PyQuery as pq
 import common
 
 def getId(url):
-	arr = url.split("-")
-	arr1 = arr[1].split(".")
-	id = arr1[0]
+	arr = url.split("/")
+	id = arr[len(arr) - 2]
+	
 	return id
 
 def getSiteUrl(urlRequest, monitor, rcbUrl):
@@ -33,16 +33,17 @@ def getSiteUrl(urlRequest, monitor, rcbUrl):
 def getRcb(monitor):
 	print("hyip_scope.getRcb()")
 	
-	rcb_url = "http://{0}/allrcb.html".format(monitor)
+	rcb_url = "http://{0}/new".format(monitor)
 	d = pq(url=rcb_url)
-	tables = d("table tr td font a")
+	list = d("a.joinnw")
 	siteList = []
 	
-	for item in tables:
-		if item.text:
-			obj = {}
-			obj['id'] = getId(item.get("href"))
-			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+	for item in list:
+		obj = {}
+		obj['id'] = getId(item.get("href"))
+		
+		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:		
+			obj['siteRCBUrl'] = "http://{0}/details/aj/rcb/lid/{1}/".format(monitor, obj['id'])
 			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
@@ -51,7 +52,7 @@ def getRcb(monitor):
 				obj['siteId'] = siteId
 				
 				siteList.append(obj)
-				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
+			print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				
 	for item in siteList:
 		common.insertSiteMonitor(item, monitor)
@@ -77,7 +78,6 @@ def checkRcb(monitor):
 				common.setPaid(item[0])
 	
 def run():
-	MONITOR = "hyipscope.org"
+	MONITOR = "hyipstop.com"
 	getRcb(MONITOR)
-	checkRcb(MONITOR)
-
+	#checkRcb(MONITOR)

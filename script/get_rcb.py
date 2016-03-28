@@ -6,6 +6,7 @@ import util
 import mysql
 import hyip_scope
 import hyip_tank
+import hyip_stop
 	
 def main():	
 	print "\n========== RUN get_rcb.py ============"
@@ -13,6 +14,7 @@ def main():
 	
 	hyip_scope.run()
 	hyip_tank.run()
+	hyip_stop.run()
 	
 	util.logNow("END AT")
 

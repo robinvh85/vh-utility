@@ -52,11 +52,9 @@ def getRcb(monitor):
 				siteId = common.insertSite(obj)
 				obj['siteId'] = siteId
 				
-				
+				siteList.append(obj)
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
 				
-			siteList.append(obj)
-					
 	for item in siteList:
 		common.insertSiteMonitor(item, monitor)
 

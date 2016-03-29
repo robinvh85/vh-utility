@@ -42,7 +42,11 @@ angular.module("app").factory("resources", function($resource) {
 	  create: {
         method: "POST",
 		url: apiUrl + "/hyips/create"
-      },	  
+      },
+	  listSiteStats: {
+        method: "POST",
+		url: apiUrl + "/hyips/listSiteStats"
+      },		  
     }),
   };
 });

@@ -12,6 +12,11 @@ class HyipsController extends ControllerBase
 		
     }
 
+	public function statAction()
+    {
+		
+    }
+	
     public function listAction()
     {
 		$list = SiteMonitors::getList();	
@@ -97,5 +102,14 @@ class HyipsController extends ControllerBase
 		}
 		        
         echo json_encode(array("status" => $status));
+    }
+	
+	public function listSiteStatsAction()
+    {
+		$params = json_decode(file_get_contents('php://input'));
+		$list = SiteStats::find("site_id = $params->site_id");	
+		
+        $this->view->disable();
+        echo json_encode(array("data" => $list->toArray()));		
     }
 }

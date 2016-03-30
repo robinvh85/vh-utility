@@ -6,7 +6,7 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 		
 		$('#' + chart_id).highcharts({
 			chart: {
-                zoomType: 'x'
+                zoomType: 'xy'
             },
 			colors: ['#6BAECF', '#f7a35c', '#46B31B'],
             title: {
@@ -75,6 +75,64 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 		});
 	}
 	
+	function createChart2(chart_id, chart_name, unit1_name, unit2_name, data1, data2){
+		
+		$('#' + chart_id).highcharts({
+			chart: {
+                zoomType: 'xy'
+            },
+			colors: ['#6BAECF', '#f7a35c', '#46B31B'],
+            title: {
+                text: chart_name
+            },
+            subtitle: {
+                text: ""
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: [
+			{
+				title: {
+                    text: ''
+				},
+				min:0,
+			},{
+				opposite: true,
+				title: {
+                    text: ''
+				},
+				min:0,
+			}],/*        
+            plotOptions: {
+                area: {           
+					fillOpacity: 0.5,
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },*/
+            series: [{
+                type: 'line',
+                name: unit1_name,
+				data: data1,
+				yAxis: 0
+			},{
+                type: 'line',
+                name: unit2_name,
+				data: data2,
+				yAxis: 1
+			}]
+		});
+	}
+	
 	$scope.init = function(siteId){
 		var params = {site_id:siteId};
 		resources.hyips.listSiteStats(params).$promise.then(function(res) {
@@ -85,6 +143,10 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 			var data_withdraw_ratio = [];
 			var data_total_acc = [];
 			var data_active_acc = [];
+			var data_increase_deposit = [];
+			var previous_deposit = 0;
+			var data_increase_acc = [];
+			var previous_acc = 0;
 			
 			for(var i=0; i<list.length; i++){
 				var time = Number(list[i].time) + 25200000;
@@ -108,10 +170,29 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 				data_active_acc[i] = []
 				data_active_acc[i].push(time);
 				data_active_acc[i].push(Number(list[i].active_account));
+				
+				data_increase_deposit[i] = []
+				data_increase_deposit[i].push(time);
+				if(previous_deposit > 0){
+					data_increase_deposit[i].push(Number(list[i].total_deposit) - previous_deposit);
+				} else {
+					data_increase_deposit[i].push(0);
+				}
+				previous_deposit = Number(list[i].total_deposit);
+				
+				data_increase_acc[i] = []
+				data_increase_acc[i].push(time);
+				if(previous_acc > 0){
+					data_increase_acc[i].push(Number(list[i].total_account) - previous_acc);
+				} else {
+					data_increase_acc[i].push(0);
+				}
+				previous_acc = Number(list[i].total_account);
 			}
 
 			createChart("chart_invest", "Invest", "Deposit", "Withdraw", data_deposit, data_withdraw, data_withdraw_ratio);
-			createChart("chart_acc", "Account", "Total Account", "Active Account", data_total_acc, data_active_acc);			
+			createChart("chart_acc", "Account", "Total Account", "Active Account", data_total_acc, data_active_acc);
+			createChart2("chart_increase", "Increase", "Deposit", "Account", data_increase_deposit, data_increase_acc);			
 		});
 	}
 	

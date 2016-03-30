@@ -24,7 +24,7 @@ def insertSite(obj):
 
 def insertSiteMonitor(obj, monitor):
 	query = """
-		INSERT IGNORE INTO site_monitor(site_id, monitor, ref_site_id, ref_site_url) values ({0}, '{1}', {2}, '{3}')
+		INSERT IGNORE INTO site_monitor(site_id, monitor, ref_site_id, ref_site_url) values ({0}, '{1}', '{2}', '{3}')
 	""".format(obj['siteId'], monitor, obj['id'], obj['siteRCBUrl'])
 	
 	return mysql.executeNoneQuery(query)

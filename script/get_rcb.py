@@ -10,6 +10,7 @@ import hyip_stop
 import my_hyip
 import gs_monitor
 import hyip_income
+import invest_tracing
 	
 def main():	
 	print "\n========== RUN get_rcb.py ============"
@@ -21,6 +22,7 @@ def main():
 	my_hyip.run()
 	gs_monitor.run()
 	hyip_income.run()
+	invest_tracing.run()
 	
 	util.logNow("END AT")
 

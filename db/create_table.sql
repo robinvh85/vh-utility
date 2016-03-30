@@ -12,10 +12,11 @@ CREATE TABLE `sites` (
 CREATE TABLE `site_monitor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `site_id` int(11) NOT NULL,
-  `monitor` varchar(50) NOT NULL,
+  `monitor` varchar(50) CHARACTER SET utf8 NOT NULL,
   `ref_site_id` int(11) DEFAULT NULL,
-  `ref_site_url` varchar(75) DEFAULT NULL,
+  `ref_site_url` varchar(75) CHARACTER SET utf8 DEFAULT NULL,
   `is_paid` tinyint(4) NOT NULL DEFAULT '0',
+  `note` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_siteId_monitor` (`site_id`,`monitor`)
 ) DEFAULT CHARSET=utf8;

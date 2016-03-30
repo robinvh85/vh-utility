@@ -17,8 +17,8 @@
 			<td style="width:40px;">Life</td>
 			<td style="width:40px;">Scam</td>
 			<td style="width:200px;">Monitor</td>
-			<td style="width:40px;">Google</td>
-			<td style="width:40px;">Stat</td>
+			<td style="width:40px;"></td>
+			<td style="width:40px;"></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -50,9 +50,9 @@
 		<td><input type="text" ng-model="item.start_at" style="width:85px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 		<td style="text-align:center;"> [[ calLifeTime(item.start_at) ]] </td>	
 		<td style="text-align:center;"><input type="checkbox" ng-model="item.is_scam" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>
-		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a></td>
-		<td><a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Link</a></td>
+		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a></td>		
 		<td><a href="/hyips/stat?site_id=[[ item.site_id ]]" target="_blank">Stat</a></td>
+		<td><a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a></td>
 		<td></td>
 	</tr>
 </table>

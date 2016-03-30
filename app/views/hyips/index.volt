@@ -18,6 +18,7 @@
 			<td style="width:40px;">Scam</td>
 			<td style="width:200px;">Monitor</td>
 			<td style="width:40px;">Google</td>
+			<td style="width:40px;">Stat</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -32,6 +33,7 @@
 				<input type="text" ng-model="newItem.monitor" class="form-control input-sm" placeholder="Monitor" style="width:100px; display:inherit;"/>
 				<input type="text" ng-model="newItem.ref_site_id" class="form-control input-sm" placeholder="ID" style="width:70px; display:inherit;"/>
 			</td>
+			<td></td>
 			<td></td>
 			<td><button class="btn btn-primary btn-sm" ng-click="addNewItem()">Add</button></td>
 		</tr>
@@ -50,6 +52,7 @@
 		<td style="text-align:center;"><input type="checkbox" ng-model="item.is_scam" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>
 		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a></td>
 		<td><a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Link</a></td>
+		<td><a href="/hyips/stat?site_id=[[ item.site_id ]]" target="_blank">Stat</a></td>
 		<td></td>
 	</tr>
 </table>

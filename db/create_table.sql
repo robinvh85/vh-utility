@@ -30,13 +30,19 @@ CREATE TABLE `unknow_sites` (
 ) DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `site_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` int(11) DEFAULT NULL,
+  `total_account` int(11) DEFAULT NULL,
+  `active_account` int(11) DEFAULT NULL,
+  `total_deposit` int(11) DEFAULT NULL,
+  `total_withdraw` int(11) DEFAULT NULL,
+  `time` bigint(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_site_id` (`site_id`)
+) DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE `sites`
-DROP COLUMN `name`;
-
-ALTER TABLE `site_monitor`
-ADD COLUMN `note`  varchar(50) NULL AFTER `is_paid`;
 
 
 

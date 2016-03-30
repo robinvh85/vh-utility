@@ -1,42 +1,48 @@
 angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $interval, resources) {
-	
-	function createChart(data){
-		$('#chart').highcharts({
+		
+	function createChart(chart_id, chart_name, unit1_name, unit2_name, data1, data2, data3){
+		
+		if(!data3) data3 = [];
+		
+		$('#' + chart_id).highcharts({
 			chart: {
                 zoomType: 'x'
             },
+			colors: ['#6BAECF', '#f7a35c', '#46B31B'],
             title: {
-                text: 'over time'
+                text: chart_name
             },
             subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                text: ""
             },
             xAxis: {
                 type: 'datetime'
             },
-            yAxis: {
+            yAxis: [
+			{
                 title: {
-                    text: 'Exchange rate'
-                }
-            },
-            legend: {
-                enabled: false
-            },
+                    text: ''
+                },
+				min:0,
+            },{
+				title: {
+                    text: ''
+				},
+				min:0,
+			},{
+				opposite: true,
+				labels: {
+					format: '{value}%',
+				},
+				title: {
+                    text: 'Percent'
+				},				
+				min:0,
+				max:100
+			}],            
             plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
-                    },
+                area: {           
+					fillOpacity: 0.5,
                     marker: {
                         radius: 2
                     },
@@ -52,32 +58,62 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 
             series: [{
                 type: 'area',
-                name: 'Test',
-				data: data
+                name: unit1_name,
+				data: data1,
+				yAxis: 0
+			},{
+                type: 'area',
+                name: unit2_name,
+				data: data2,
+				yAxis: 0
+			},{
+                type: 'line',
+                name: 'Ratio',
+				data: data3,
+				yAxis: 2
 			}]
 		});
 	}
 	
-	$scope.init = function(){
-		var params = {site_id:1};
+	$scope.init = function(siteId){
+		var params = {site_id:siteId};
 		resources.hyips.listSiteStats(params).$promise.then(function(res) {
 			//console.log("Updated Site", res);
 			var list = res.data;
-			var data = [];
+			var data_deposit = [];
+			var data_withdraw = [];
+			var data_withdraw_ratio = [];
+			var data_total_acc = [];
+			var data_active_acc = [];
+			
 			for(var i=0; i<list.length; i++){
-				data[i] = []
-				data[i].push(Number(list[i].time));
-				data[i].push(Number(list[i].total_deposit));
+				var time = Number(list[i].time) + 25200000;
+				
+				data_deposit[i] = []
+				data_deposit[i].push(time);
+				data_deposit[i].push(Number(list[i].total_deposit));
+				
+				data_withdraw[i] = []
+				data_withdraw[i].push(time);
+				data_withdraw[i].push(Number(list[i].total_withdraw));
+				
+				data_withdraw_ratio[i] = []
+				data_withdraw_ratio[i].push(time);
+				data_withdraw_ratio[i].push(parseInt(Number(list[i].total_withdraw)/Number(list[i].total_deposit) * 10000) / 100);
+				
+				data_total_acc[i] = []
+				data_total_acc[i].push(time);
+				data_total_acc[i].push(Number(list[i].total_account));
+				
+				data_active_acc[i] = []
+				data_active_acc[i].push(time);
+				data_active_acc[i].push(Number(list[i].active_account));
 			}
-			
-			console.log(data);
-			//data = [];
-			//data.push([1459268667000, 100]);
-			//data.push([1459268756000, 110]);
-			
-			createChart(data);
+
+			createChart("chart_invest", "Invest", "Deposit", "Withdraw", data_deposit, data_withdraw, data_withdraw_ratio);
+			createChart("chart_acc", "Account", "Total Account", "Active Account", data_total_acc, data_active_acc);			
 		});
 	}
 	
-	$scope.init();
+	//$scope.init();
 });

@@ -7,16 +7,16 @@ import common
 def getValues(url):
 	print("getValues()")
 	
-	d = pq(url="https://{0}".format(url))
-	list = d(".calrights")
+	d = pq(url="https://www.{0}".format(url))
+	list = d(".started-menu ul li p span")
 	obj = {}
 	obj['site_id'] = common.getSiteId(url)
 	
 	if obj['site_id'] == None:
 		obj['site_id'] = -1
 	
-	obj['total_account'] = list[1].text_content()
-	obj['active_account'] = list[2].text_content()
+	obj['total_account'] = list[2].text_content()
+	obj['active_account'] = 0
 	obj['total_deposit'] = list[3].text_content().replace("$ ", "")
 	obj['total_withdraw'] = list[4].text_content().replace("$ ", "")
 	obj['time'] = long(time.time()) * 1000
@@ -25,11 +25,13 @@ def getValues(url):
 	common.insertSiteStat(obj)
 
 def run():	
-	print "\n========== RUN webflipfunds_com.run() ============"
+	print "\n========== RUN unitiro_com.run() ============"
 	try :
-		getValues("webflipfunds.com")
+		getValues("unitiro.com")
 	except Exception:
 		pass
+	
+
 
 
 

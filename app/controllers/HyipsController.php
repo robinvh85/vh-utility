@@ -14,7 +14,12 @@ class HyipsController extends ControllerBase
 
 	public function statAction()
     {
+		$site_id = $this->request->getQuery('site_id');	
 		
+		$site = Sites::findFirst($site_id);
+		
+		$this->view->site_id = $site_id;
+		$this->view->site_url = $site->url;
     }
 	
     public function listAction()

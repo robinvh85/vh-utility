@@ -2,8 +2,10 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 
 	$scope.itemList = [];
 	$scope.itemUnknowList = [];
-	$scope.typeList = ["1d", "3d", "7d", "15d", "30d", ">30d"];
+	$scope.typeList = ["1d", "3d", "7d", "10d", "15d", "30d", ">30d"];
 	$scope.newItem = {}
+	$scope.isSortByNote = false;
+	$scope.accOrder = {"investvh":0, "deposit":1, "dollar":2, "money":3, "OK":4};
 	
 	$scope.startAtChange = function(index){
 		console.log(index);
@@ -24,6 +26,7 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 			id: item.site_id,
 			start_at: item.start_at,
 			is_scam: item.is_scam,
+			is_stat: item.is_stat,
 			type: item.type
 		};
 		
@@ -74,6 +77,18 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 			$scope.itemUnknowList = res.data;	
 		});	
 	}	
+	
+	$scope.sortBy = function(item){
+		if($scope.isSortByNote){
+			if(item.note != null){
+				for(key in $scope.accOrder){
+					if(item.note.indexOf(key) != -1){
+						return $scope.accOrder[key];
+					}
+				}
+			}
+		}
+	}
 	
 	$scope.init = function(){
 		refreshData();

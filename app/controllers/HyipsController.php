@@ -46,6 +46,7 @@ class HyipsController extends ControllerBase
         $model->is_scam = intval($params->is_scam);
         $model->type = $params->type;
 		$model->start_at = $params->start_at;
+		$model->is_stat = intval($params->is_stat);
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));

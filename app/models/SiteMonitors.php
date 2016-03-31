@@ -42,7 +42,7 @@ class SiteMonitors extends ModelBase
     }
 	
 	public static function getList(){
-        $phql = "SELECT sm.id, sm.monitor, sm.ref_site_url, sm.site_id, sm.note, s.url, s.is_scam, s.start_at, s.type
+        $phql = "SELECT sm.id, sm.monitor, sm.ref_site_url, sm.site_id, sm.note, s.url, s.is_scam, s.is_stat, s.start_at, s.type
 			FROM SiteMonitors sm
 			JOIN Sites s ON sm.site_id = s.id AND s.is_scam = 0
 			ORDER BY s.start_at desc, s.id ASC";

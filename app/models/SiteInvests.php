@@ -1,15 +1,7 @@
 <?php
 
-class Sites extends ModelBase
+class SiteInvests extends ModelBase
 {
-    public $id;
-    public $url;
-    public $name;
-    public $start_at;	
-	public $end_at;
-	public $type;
-	public $is_scam;
-
     /**
      * Returns table name mapped in the model.
      *
@@ -17,7 +9,7 @@ class Sites extends ModelBase
      */
     public function getSource()
     {
-        return 'sites';
+        return 'site_invest';
     }
 
     /**
@@ -41,12 +33,13 @@ class Sites extends ModelBase
     {
         return parent::findFirst($parameters);
     }
-
-	public static function getList(){
-        $phql = "SELECT s.*
-			FROM Sites s
-			WHERE s.is_scam = 0
-			ORDER BY s.start_at desc, s.id ASC";
+	
+	public static function getList($site_id){
+        $phql = "SELECT sm.site_id, s.url, sm.monitor, sm.ref_site_url, si.acc_name, si.ip, si.amount, si.time
+			FROM SiteMonitors sm
+			JOIN Sites s ON s.id = sm.site_id AND s.id = $site_id
+			LEFT JOIN SiteInvests si ON si.site_id = sm.site_id AND si.monitor = sm.monitor
+			ORDER BY sm.ref_site_url ASC, si.time DESC ";
 
         $list = self::getManager()->executeQuery($phql);
 

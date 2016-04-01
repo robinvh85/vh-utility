@@ -48,5 +48,19 @@ angular.module("app").factory("resources", function($resource) {
 		url: apiUrl + "/hyips/listSiteStats"
       },		  
     }),
+	hyips2: $resource(apiUrl + "/hyips/list2", {}, {
+      list: {
+        method: "POST",
+		url: apiUrl + "/hyips/list2"
+      },
+	  listSiteInvest : {
+        method: "POST",
+		url: apiUrl + "/hyips/listSiteInvest"
+      },
+	  createInvest : {
+        method: "POST",
+		url: apiUrl + "/hyips/createInvest"
+      }
+    }),
   };
 });

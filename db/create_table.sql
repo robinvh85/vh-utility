@@ -26,8 +26,8 @@ CREATE TABLE `site_monitor` (
 
 CREATE TABLE `unknow_sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `monitor` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `monitor` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_done` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_url` (`url`)
@@ -44,6 +44,17 @@ CREATE TABLE `site_stats` (
   `time` bigint(15) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_site_id` (`site_id`)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `site_invest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` int(11) DEFAULT NULL,
+  `monitor` varchar(50) DEFAULT NULL,
+  `acc_name` varchar(50) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `ip` varchar(20) DEFAULT NULL,
+  `time` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
 

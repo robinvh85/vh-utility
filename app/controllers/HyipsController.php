@@ -12,6 +12,17 @@ class HyipsController extends ControllerBase
 		
     }
 
+	public function index2Action()
+    {
+		
+    }
+	
+	public function investAction()
+    {
+		$site_id = $this->request->getQuery('site_id');			
+		$this->view->site_id = $site_id;
+    }
+	
 	public function statAction()
     {
 		$site_id = $this->request->getQuery('site_id');	
@@ -31,6 +42,15 @@ class HyipsController extends ControllerBase
         echo json_encode(array("data" => $list->toArray()));
     }
 
+	public function list2Action()
+    {
+		$list = Sites::getList();	
+		
+        $this->view->disable();
+		
+        echo json_encode(array("data" => $list->toArray()));
+    }
+	
 	public function listUnknowAction()
     {
 		$list = UnknowSites::find("is_done = 0");	
@@ -110,10 +130,41 @@ class HyipsController extends ControllerBase
         echo json_encode(array("status" => $status));
     }
 	
+	public function createInvestAction()
+    {
+        $this->view->disable();
+        $status = "OK";
+
+        $params = json_decode(file_get_contents('php://input'));
+		
+		$model = new SiteInvests();
+		$model->site_id = $params->site_id;
+		$model->monitor = $params -> monitor;
+		$model->acc_name = $params -> acc_name;
+		$model->amount = $params -> amount;
+		$model->ip = $params -> ip;
+		$model->time = $params -> time;
+		
+		if(!$model->save()){
+			$status = "NG";
+		}
+		        
+        echo json_encode(array("status" => $status));
+    }
+	
 	public function listSiteStatsAction()
     {
 		$params = json_decode(file_get_contents('php://input'));
 		$list = SiteStats::find("site_id = $params->site_id");	
+		
+        $this->view->disable();
+        echo json_encode(array("data" => $list->toArray()));		
+    }
+	
+	public function listSiteInvestAction()
+    {
+		$params = json_decode(file_get_contents('php://input'));
+		$list = SiteInvests::getList($params->site_id);	
 		
         $this->view->disable();
         echo json_encode(array("data" => $list->toArray()));		

@@ -35,7 +35,7 @@ class SiteInvests extends ModelBase
     }
 	
 	public static function getList($site_id){
-        $phql = "SELECT sm.site_id, s.url, sm.monitor, sm.ref_site_url, si.acc_name, si.ip, si.amount, si.time
+        $phql = "SELECT sm.site_id, s.url, sm.monitor, sm.ref_site_url, si.id, si.acc_name, si.ip, si.amount, si.time, si.status
 			FROM SiteMonitors sm
 			JOIN Sites s ON s.id = sm.site_id AND s.id = $site_id
 			LEFT JOIN SiteInvests si ON si.site_id = sm.site_id AND si.monitor = sm.monitor
@@ -46,4 +46,13 @@ class SiteInvests extends ModelBase
         return $list;
     }
 	
+	public static function getActiveInvests(){
+        $phql = "SELECT DISTINCT site_id
+			FROM SiteInvests 
+			WHERE status='Invest' OR status='Pending'";
+
+        $list = self::getManager()->executeQuery($phql);
+
+        return $list;
+    }
 }

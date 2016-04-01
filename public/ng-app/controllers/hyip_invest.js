@@ -3,14 +3,26 @@ angular.module("app").controller("HyipInvestCtrl", function($scope, $timeout, $i
 	$scope.itemList = [];	
 	$scope.newItem = {};
 	$scope.siteId = -1;
+	$scope.statusList = ["Invest", "Pending", "OK", "NG"];
 	
 	$scope.addNewItem = function(){
 		$scope.newItem.site_id = $scope.siteId;
+		
+		if(!$scope.newItem.monitor || !$scope.newItem.acc_name || !$scope.newItem.amount)
+			return;
 		
 		resources.hyips2.createInvest($scope.newItem).$promise.then(function(res) {	
 			if(res.status == "OK"){
 				$scope.newItem = {};
 				refreshData($scope.siteId);
+			}
+		});	
+	}
+	
+	$scope.updateInvest = function(item){
+		resources.hyips2.updateInvest(item).$promise.then(function(res) {	
+			if(res.status == "OK"){
+				console.log("Update success");
 			}
 		});	
 	}
@@ -42,5 +54,6 @@ angular.module("app").controller("HyipInvestCtrl", function($scope, $timeout, $i
 		$scope.siteId = site_id;
 		
 		refreshData(site_id);
+		$scope.newItem.time = moment().format("YYYY/MM/DD hh:mm:ss");
 	}
 });

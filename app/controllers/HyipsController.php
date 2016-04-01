@@ -14,7 +14,8 @@ class HyipsController extends ControllerBase
 
 	public function index2Action()
     {
-		
+		$activeInvests = SiteInvests::getActiveInvests();
+		$this->view->activeInvests = json_encode($activeInvests->toArray());
     }
 	
 	public function investAction()
@@ -95,6 +96,20 @@ class HyipsController extends ControllerBase
 		$params = json_decode(file_get_contents('php://input'));
         $model = SiteMonitors::findFirst($params->id);
         $model->note = $params->note;
+		
+        if($model->save()){
+            echo json_encode(array("status" => "OK"));
+        } else {
+            echo json_encode(array("status" => "NG"));
+        }
+    }
+	
+	public function updateInvestAction()
+    {
+        $this->view->disable();
+		$params = json_decode(file_get_contents('php://input'));
+        $model = SiteInvests::findFirst($params->id);
+        $model->status = $params->status;
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));

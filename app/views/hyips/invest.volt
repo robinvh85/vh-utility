@@ -45,6 +45,11 @@
 		<td style="text-align:center;">[[ item.amount ]]</td>	
 		<td>[[ item.time ]]</td>
 		<td>[[ item.ip ]]</td>
+		<td>
+		<select ng-model='item.status' ng-change="updateInvest(item)">
+			<option ng-repeat="status in statusList" ng-value="status">[[ status ]]</option>
+		</select>
+		</td>
 		<td></td>
 	</tr>
 	</tbody>	

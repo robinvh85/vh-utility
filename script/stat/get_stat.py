@@ -16,6 +16,7 @@ import stockmarketinv_club
 import fxprofit_biz
 import managerhourly_com
 import nanoproinvest_com
+import eco_power_me
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -30,6 +31,7 @@ def main():
 	fxprofit_biz.run()
 	managerhourly_com.run()
 	nanoproinvest_com.run()
+	eco_power_me.run()
 	
 	util.logNow("END AT")
 

@@ -6,9 +6,24 @@
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #fbf6dd;
 }
+
+.active td{
+	background-color: #cceebb !important;
+}
 </style>
 
-<div ng-controller="HyipIndexCtrl">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Sites</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/info/index" target="_blank">Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div ng-controller="HyipIndex2Ctrl" ng-init='activeInvests={{ activeInvests }}; init();'>
 
 <table class="table table-bordered table-hover table-striped">
 	<thead>
@@ -25,7 +40,7 @@
 		</tr>		
 	</thead>
 	<tbody>
-	<tr ng-repeat="item in itemList | orderBy:sortBy" >
+	<tr ng-repeat="item in itemList | orderBy:sortBy" ng-class="checkActive(item)?'active':''">
 		<td>[[ $index + 1 ]]</td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>

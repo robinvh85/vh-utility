@@ -15,8 +15,8 @@
 		<tr>
 			<td style="width:30px;"></td>
 			<td style="width:250px;">URL</td>
-			<td style="width:120px;">Note <input type="checkbox" ng-model="isSortByNote" /></td>
-			<td style="width:80px;">Type</td>
+			<td style="width:140px;">Note <input type="checkbox" ng-model="isSortByNote" /></td>
+			<td style="width:70px;">Type</td>
 			<td style="width:110px;">Start At</td>
 			<td style="width:40px;">Life</td>
 			<td style="width:40px;">Scam</td>
@@ -32,7 +32,7 @@
 		- <a href="/hyips/stat?site_id=[[ item.site_id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>
 		</td>
-		<td><input type="text" ng-model="item.note" style="width:110px" class="form-control input-sm" ng-blur="updateMonitorSite(item)" /></td>
+		<td><input type="text" ng-model="item.note" style="width:130px" class="form-control input-sm" ng-blur="updateMonitorSite(item)" /></td>
 		<td>
 			<select ng-model="item.type" ng-change="updateSite(item)">
 				<option ng-repeat="item in typeList" value="[[ item ]]">[[ item ]]</option>

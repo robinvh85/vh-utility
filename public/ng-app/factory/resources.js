@@ -60,6 +60,10 @@ angular.module("app").factory("resources", function($resource) {
 	  createInvest : {
         method: "POST",
 		url: apiUrl + "/hyips/createInvest"
+      },
+	  updateInvest : {
+        method: "POST",
+		url: apiUrl + "/hyips/updateInvest"
       }
     }),
   };

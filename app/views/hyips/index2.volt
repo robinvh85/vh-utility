@@ -19,6 +19,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/info/index" target="_blank">Info</a></li>
+	  <li><a href="/hyips/invest" target="_blank">Investing</a></li>
     </ul>
   </div>
 </nav>
@@ -34,9 +35,9 @@
 			<td style="width:80px;">Type</td>
 			<td style="width:110px;">Start At</td>
 			<td style="width:40px;">Life</td>
-			<td style="width:40px;">Scam</td>			
-			<td></td>
-			<td></td>
+			<td style="width:40px;">Scam</td>
+			<td style="width:80px;"></td>			
+			<td>Note</td>
 		</tr>		
 	</thead>
 	<tbody>
@@ -56,7 +57,7 @@
 		<td style="text-align:center;"> [[ calLifeTime(item.start_at) ]] </td>	
 		<td style="text-align:center;"><input type="checkbox" ng-model="item.is_scam" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>		
 		<td><a href="/hyips/invest?site_id=[[ item.id ]]" target="_blank">Invest</a></td>
-		<td></td>
+		<td><input type="text" ng-model="item.note" style="width:240px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 	</tr>
 	</tbody>	
 </table>

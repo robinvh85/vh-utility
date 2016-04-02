@@ -42,11 +42,10 @@ def getRcb(monitor):
 	for index, item in enumerate(tables):
 		if index % 2 == 0 and index < len(tables) - 2:
 			obj = {}
+			obj['siteId'] = ""
 			obj['id'] = getId(item.get("href"))
 			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
 			obj['url'] = getSiteUrl(obj['id'], monitor, obj['siteRCBUrl'])
-			obj['siteId'] = ""
-			obj['siteRCBUrl'] = ""
 			
 			if obj['url'] != '':
 				siteId = common.insertSite(obj)

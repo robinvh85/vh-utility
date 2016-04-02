@@ -7,7 +7,7 @@ import common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib")))
 import mysql
 import util
-#import smartplanx_com
+
 import unitiro_com
 import webflipfunds_com
 import custommining_com
@@ -16,13 +16,12 @@ import stockmarketinv_club
 import fxprofit_biz
 import managerhourly_com
 import nanoproinvest_com
-import eco_power_me
+import bitcoinnetworks_biz
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
 	util.logNow("START AT")
 	
-#	smartplanx_com.run()
 	unitiro_com.run()
 	webflipfunds_com.run()
 	custommining_com.run()
@@ -31,7 +30,7 @@ def main():
 	fxprofit_biz.run()
 	managerhourly_com.run()
 	nanoproinvest_com.run()
-	eco_power_me.run()
+	bitcoinnetworks_biz.run()
 	
 	util.logNow("END AT")
 

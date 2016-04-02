@@ -7,14 +7,14 @@ import common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib")))
 import mysql
 import util
-import eco_power_me
+import bitcoinnetworks_biz
 
 
 def main():	
 	print "\n========== RUN test_get_stat.py ============"
 	util.logNow("START AT")
 	
-	eco_power_me.run()
+	bitcoinnetworks_biz.run()
 	
 	util.logNow("END AT")
 

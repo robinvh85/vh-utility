@@ -68,6 +68,7 @@ class HyipsController extends ControllerBase
         $model->type = $params->type;
 		$model->start_at = $params->start_at;
 		$model->is_stat = intval($params->is_stat);
+		$model->note = $params->note;
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));
@@ -179,7 +180,12 @@ class HyipsController extends ControllerBase
 	public function listSiteInvestAction()
     {
 		$params = json_decode(file_get_contents('php://input'));
-		$list = SiteInvests::getList($params->site_id);	
+		
+		if($params->site_id){
+			$list = SiteInvests::getList($params->site_id);	
+		} else {
+			$list = SiteInvests::getAllActiveInvests();	
+		}
 		
         $this->view->disable();
         echo json_encode(array("data" => $list->toArray()));		

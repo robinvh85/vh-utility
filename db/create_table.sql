@@ -5,12 +5,10 @@ CREATE TABLE `sites` (
   `end_at` date DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
   `is_scam` tinyint(4) NOT NULL DEFAULT '0',
-  `is_stat` tinyint(4) NOT NULL DEFAULT '0',
+  `note` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_url` (`url`) USING BTREE
 ) DEFAULT CHARSET=utf8;
-
-
 
 CREATE TABLE `site_monitor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -22,7 +22,7 @@
 			<td style="width:100px;">IP</td>
 			<td></td>
 		</tr>
-		<tr>
+		<tr ng-show="siteId">
 			<td></td>
 			<td></td>
 			<td><input type="text" ng-model="newItem.monitor" style="width:150px;"/></td>
@@ -40,7 +40,7 @@
 		- <a href="/hyips/stat?site_id=[[ item.site_id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>
 		</td>
-		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a></td>		
+		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a> <a href="#" style="margin-left:10px;" ng-click="newItem.monitor=item.monitor;"><span class="glyphicon glyphicon-plus"></span></a></td>		
 		<td>[[ item.acc_name ]]</td>
 		<td style="text-align:center;">[[ item.amount ]]</td>	
 		<td>[[ item.time ]]</td>

@@ -1,4 +1,4 @@
-angular.module("app").controller("HyipInvestCtrl", function($scope, $timeout, $interval, resources) {
+angular.module("app").controller("HyipInvestCtrl", function($scope, $window, $timeout, $interval, resources) {
 
 	$scope.itemList = [];	
 	$scope.newItem = {};
@@ -55,5 +55,6 @@ angular.module("app").controller("HyipInvestCtrl", function($scope, $timeout, $i
 		
 		refreshData(site_id);
 		$scope.newItem.time = moment().format("YYYY/MM/DD hh:mm:ss");
+		$scope.newItem.ip = $window.myip;
 	}
 });

@@ -13,6 +13,7 @@
 		<script src="/js/highcharts.js"></script>
         <script src="/plugins/angular/js/angular.min.js"></script>
 		<script src="/js/moment.min.js"></script>
+		<script type="text/javascript" src="https://l2.io/ip.js?var=myip"></script>
 		<script>
 			angular.module("app", ["ngResource", "ui.bootstrap"]).config(function($interpolateProvider) {
 				$interpolateProvider.startSymbol('[[');

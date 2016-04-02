@@ -29,7 +29,8 @@ angular.module("app").controller("HyipIndex2Ctrl", function($scope, $timeout, $i
 			start_at: item.start_at,
 			is_scam: item.is_scam,
 			is_stat: item.is_stat,
-			type: item.type
+			type: item.type,
+			note: item.note
 		};
 		
 		resources.hyips.updateSite(params).$promise.then(function(res) {

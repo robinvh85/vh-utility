@@ -54,7 +54,7 @@ angular.module("app").controller("HyipInvestCtrl", function($scope, $window, $ti
 		$scope.siteId = site_id;
 		
 		refreshData(site_id);
-		$scope.newItem.time = moment().format("YYYY/MM/DD hh:mm:ss");
+		$scope.newItem.time = moment().format("YYYY/MM/DD HH:mm:ss");
 		$scope.newItem.ip = $window.myip;
 	}
 });

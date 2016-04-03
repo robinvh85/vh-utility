@@ -160,6 +160,7 @@ class HyipsController extends ControllerBase
 		$model->amount = $params -> amount;
 		$model->ip = $params -> ip;
 		$model->time = $params -> time;
+		$model->status = "Invest";
 		
 		if(!$model->save()){
 			$status = "NG";

@@ -2,7 +2,7 @@ angular.module("app").controller("HyipIndexCtrl", function($scope, $timeout, $in
 
 	$scope.itemList = [];
 	$scope.itemUnknowList = [];
-	$scope.typeList = ["1d", "3d", "7d", "10d", "15d", "30d", ">30d"];
+	$scope.typeList = ["Hr", "1d", "3d", "7d", "10d", "15d", "30d", ">30d"];
 	$scope.newItem = {}
 	$scope.isSortByNote = false;
 	$scope.accOrder = {"investvh":0, "deposit":1, "dollar":2, "money":3, "OK":4};

@@ -61,7 +61,8 @@ class SiteInvests extends ModelBase
 			FROM SiteInvests si
 			JOIN Sites s ON s.id = si.site_id
 			JOIN SiteMonitors sm ON sm.monitor = si.monitor AND sm.site_id = si.site_id
-			WHERE si.status = 'Invest' OR si.status = 'Pending'";
+			WHERE si.status = 'Invest' OR si.status = 'Pending'
+			ORDER BY si.time";
 
         $list = self::getManager()->executeQuery($phql);
         return $list;

@@ -19,6 +19,7 @@ import nanoproinvest_com
 import bitcoinnetworks_biz
 import city_finance_org
 import greed_rush_com
+import bitcoinpalas_com
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -35,6 +36,7 @@ def main():
 	bitcoinnetworks_biz.run()
 	city_finance_org.run()
 	greed_rush_com.run()
+	bitcoinpalas_com.run()
 	
 	util.logNow("END AT")
 

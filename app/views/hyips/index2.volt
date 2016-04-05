@@ -18,7 +18,7 @@
       <a class="navbar-brand" href="#">Sites</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/info/index" target="_blank">Info</a></li>
+      <li><a href="/accounts/index" target="_blank">Info</a></li>
 	  <li><a href="/hyips/invest" target="_blank">Investing</a></li>
     </ul>
   </div>

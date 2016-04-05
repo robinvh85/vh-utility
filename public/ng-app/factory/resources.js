@@ -66,5 +66,19 @@ angular.module("app").factory("resources", function($resource) {
 		url: apiUrl + "/hyips/updateInvest"
       }
     }),
+	accounts: $resource(apiUrl + "/account/list", {}, {
+      list: {
+        method: "POST",
+		url: apiUrl + "/accounts/list"
+      },	  
+	  create : {
+        method: "POST",
+		url: apiUrl + "/accounts/create"
+      },
+	  update : {
+        method: "POST",
+		url: apiUrl + "/accounts/update"
+      }
+    }),
   };
 });

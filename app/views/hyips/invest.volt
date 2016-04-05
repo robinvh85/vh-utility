@@ -9,8 +9,9 @@
 
 .red{
 	color:red;
-}
-</style>
+}.active td{
+	background-color: #cceebb !important;
+}</style>
 
 <div ng-controller="HyipInvestCtrl" ng-init="init({{ site_id }})">
 
@@ -38,8 +39,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="item in itemList" ng-class="newItem.ip == item.ip?'red':''">
-		<td>[[ $index + 1 ]]</td>
+	<tr ng-repeat="item in itemList" ng-class="newItem.ip == item.ip?'red':''" ng-class="item.status == 'Invest' || item.status == 'Pending'?'active':''">		<td>[[ $index + 1 ]]</td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.site_id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>

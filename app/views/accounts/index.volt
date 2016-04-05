@@ -6,6 +6,10 @@
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #fbf6dd;
 }
+
+.active td{
+	background-color: #cceebb !important;
+}
 </style>
 
 <div ng-controller="AccountIndexCtrl">
@@ -38,7 +42,7 @@
 		</tr>			
 	</thead>
 	<tbody>
-	<tr ng-repeat="item in itemList" >
+	<tr ng-repeat="item in itemList" ng-class="item.amount != '0' && item.amount != '' ? 'active' : ''">
 		<td>[[ $index + 1 ]]</td>
 		<td>[[ item.group ]]</td>
 		<td>[[ item.name ]]</td>

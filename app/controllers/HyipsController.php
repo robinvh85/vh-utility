@@ -154,7 +154,7 @@ class HyipsController extends ControllerBase
 	public function createInvestAction()
     {
         $this->view->disable();
-        $status = "OK";
+        $status = "NG";
 
         $params = json_decode(file_get_contents('php://input'));
 		
@@ -167,8 +167,12 @@ class HyipsController extends ControllerBase
 		$model->time = $params -> time;
 		$model->status = "Invest";
 		
-		if(!$model->save()){
-			$status = "NG";
+		if($model->save()){
+			$account = Accounts::findFirst("name='$params->acc_name'");
+			$account->amount -= $params->amount;
+			$account->save();
+			
+			$status = "OK";
 		}
 		        
         echo json_encode(array("status" => $status));
@@ -177,7 +181,20 @@ class HyipsController extends ControllerBase
 	public function listSiteStatsAction()
     {
 		$params = json_decode(file_get_contents('php://input'));
-		$list = SiteStats::find("site_id = $params->site_id");	
+		//$list = SiteStats::find("site_id = $params->site_id");	
+		
+		$list = SiteStats::query()
+			->where("site_id = $params->site_id");
+		
+		if($params->from_time > 0){
+			$list->andWhere("time >= $params->from_time");
+		}
+		
+		if($params->to_time > 0){
+			$list->andWhere("time <= $params->to_time");
+		}
+		
+		$list = $list->execute();
 		
         $this->view->disable();
         echo json_encode(array("data" => $list->toArray()));		

@@ -1,5 +1,9 @@
 angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $interval, resources) {
-		
+	
+	$scope.fromDate = "";
+	$scope.toDate = "";	
+	$scope.siteId = -1;
+	
 	function createChart(chart_id, chart_name, unit1_name, unit2_name, data1, data2, data3){
 		
 		if(!data3) data3 = [];
@@ -133,8 +137,24 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 		});
 	}
 	
-	$scope.init = function(siteId){
-		var params = {site_id:siteId};
+	$scope.refreshData = function(){
+		var from_time = 0;
+		var to_time = 0;
+		
+		if($scope.fromDate.trim() != ""){
+			from_time = moment($scope.fromDate).unix() * 1000;			
+		}
+		
+		if($scope.toDate.trim() != ""){
+			to_time = moment($scope.toDate).unix() * 1000;			
+		}
+		
+		var params = {
+			site_id:$scope.siteId,
+			from_time : from_time,
+			to_time : to_time
+		};
+		
 		resources.hyips.listSiteStats(params).$promise.then(function(res) {
 			//console.log("Updated Site", res);
 			var list = res.data;
@@ -194,6 +214,11 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 			createChart("chart_acc", "Account", "Total Account", "Active Account", data_total_acc, data_active_acc);
 			createChart2("chart_increase", "Increase", "Deposit", "Account", data_increase_deposit, data_increase_acc);			
 		});
+	}
+	
+	$scope.init = function(siteId){		
+		$scope.siteId = siteId;
+		$scope.refreshData();
 	}
 	
 	//$scope.init();

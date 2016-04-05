@@ -55,6 +55,19 @@ CREATE TABLE `site_invest` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `group` varchar(20) DEFAULT NULL,
+  `pm` varchar(20) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_name` (`name`)
+) DEFAULT CHARSET=utf8;
+
+
 
 
 

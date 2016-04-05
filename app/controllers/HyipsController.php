@@ -113,6 +113,11 @@ class HyipsController extends ControllerBase
         $model->status = $params->status;
 		
         if($model->save()){
+			if($model->status == "OK"){
+				$account = Accounts::findFirst("name='$params->acc_name'");
+				$account->amount += $params->amount;
+				$account->save();
+			}
             echo json_encode(array("status" => "OK"));
         } else {
             echo json_encode(array("status" => "NG"));

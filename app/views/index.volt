@@ -14,8 +14,12 @@
         <script src="/plugins/angular/js/angular.min.js"></script>
 		<script src="/js/moment.min.js"></script>
 		<script type="text/javascript" src="https://l2.io/ip.js?var=myip"></script>
+		<script src="/plugins/angular/js/ngDatepicker.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/plugins/angular/css/ngDatepicker.css">
+
 		<script>
-			angular.module("app", ["ngResource", "ui.bootstrap"]).config(function($interpolateProvider) {
+			angular.module("app", ["ngResource", "ui.bootstrap", "jkuri.datepicker"]).config(function($interpolateProvider) {
 				$interpolateProvider.startSymbol('[[');
 				$interpolateProvider.endSymbol(']]');
 			});	

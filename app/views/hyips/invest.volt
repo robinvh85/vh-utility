@@ -39,7 +39,8 @@
 		</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="item in itemList" ng-class="newItem.ip == item.ip?'red':''" ng-class="item.status == 'Invest' || item.status == 'Pending'?'active':''">		<td>[[ $index + 1 ]]</td>
+	<tr ng-repeat="item in itemList" ng-class="item.status == 'Invest' || item.status == 'Pending'?'active':''">		
+		<td>[[ $index + 1 ]]</td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.site_id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>
@@ -48,7 +49,7 @@
 		<td>[[ item.acc_name ]]</td>
 		<td style="text-align:center;">[[ item.amount ]]</td>	
 		<td>[[ item.time ]]</td>
-		<td>[[ item.ip ]]</td>
+		<td ng-class="newItem.ip == item.ip?'red':''">[[ item.ip ]]</td>
 		<td>
 		<select ng-model='item.status' ng-change="updateInvest(item)">
 			<option ng-repeat="status in statusList" ng-value="status">[[ status ]]</option>

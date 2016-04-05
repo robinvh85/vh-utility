@@ -1,7 +1,7 @@
 angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $interval, resources) {
 	
-	$scope.fromDate = "";
-	$scope.toDate = "";	
+	$scope.fromDate;
+	$scope.toDate;	
 	$scope.siteId = -1;
 	
 	function createChart(chart_id, chart_name, unit1_name, unit2_name, data1, data2, data3){
@@ -141,11 +141,11 @@ angular.module("app").controller("HyipStatCtrl", function($scope, $timeout, $int
 		var from_time = 0;
 		var to_time = 0;
 		
-		if($scope.fromDate.trim() != ""){
+		if($scope.fromDate){
 			from_time = moment($scope.fromDate).unix() * 1000;			
 		}
 		
-		if($scope.toDate.trim() != ""){
+		if($scope.toDate){
 			to_time = moment($scope.toDate).unix() * 1000;			
 		}
 		

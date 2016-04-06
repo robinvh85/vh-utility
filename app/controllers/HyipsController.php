@@ -4,7 +4,7 @@ class HyipsController extends ControllerBase
 {
 	public function initialize()
 	{
-		$this->tag->setTitle("HYIP");
+		$this->tag->setTitle("Web page");
 	}
 	
     public function indexAction()

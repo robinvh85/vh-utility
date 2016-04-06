@@ -2,7 +2,7 @@ angular.module("app").controller("AccountIndexCtrl", function($scope, $window, r
 
 	$scope.itemList = [];	
 	$scope.newItem = {};
-	$scope.groups = ["VN","JP"];
+	$scope.groups = ["VN","JP","SI","LD"];
 	
 	$scope.addNewItem = function(){
 		if(!$scope.newItem.name)

@@ -30,7 +30,8 @@ angular.module("app").controller("HyipIndex2Ctrl", function($scope, $timeout, $i
 			is_scam: item.is_scam,
 			is_stat: item.is_stat,
 			type: item.type,
-			note: item.note
+			note: item.note,
+			score: item.score
 		};
 		
 		resources.hyips.updateSite(params).$promise.then(function(res) {
@@ -90,14 +91,8 @@ angular.module("app").controller("HyipIndex2Ctrl", function($scope, $timeout, $i
 	}
 	
 	$scope.sortBy = function(item){
-		if($scope.isSortByNote){
-			if(item.note != null){
-				for(key in $scope.accOrder){
-					if(item.note.indexOf(key) != -1){
-						return $scope.accOrder[key];
-					}
-				}
-			}
+		if($scope.isSortByScore){
+			return 10 - item.score;
 		}
 	}
 	

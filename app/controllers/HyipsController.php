@@ -69,6 +69,7 @@ class HyipsController extends ControllerBase
 		$model->start_at = $params->start_at;
 		$model->is_stat = intval($params->is_stat);
 		$model->note = $params->note;
+		$model->score = $params->score;
 		
         if($model->save()){
             echo json_encode(array("status" => "OK"));

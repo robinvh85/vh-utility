@@ -6,9 +6,11 @@ CREATE TABLE `sites` (
   `type` varchar(10) DEFAULT NULL,
   `is_scam` tinyint(4) NOT NULL DEFAULT '0',
   `note` varchar(255) DEFAULT NULL,
+  `score` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_url` (`url`) USING BTREE
 ) DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `site_monitor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -29,7 +29,7 @@
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
-			<td style="width:30px;"></td>
+			<td style="width:40px;"><input type="checkbox" ng-model="isSortByScore"></td>
 			<td style="width:250px;">URL</td>
 			<td style="width:40px;">Stat</td>
 			<td style="width:80px;">Type</td>
@@ -42,7 +42,7 @@
 	</thead>
 	<tbody>
 	<tr ng-repeat="item in itemList | orderBy:sortBy" ng-class="checkActive(item)?'active':''">
-		<td>[[ $index + 1 ]]</td>
+		<td><input type="text" ng-model="item.score" style="width:40px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>

@@ -12,19 +12,21 @@ import gs_monitor
 import hyip_income
 import invest_tracing
 import my_invest_blog
+import hyip_cruiser_com
 	
 def main():	
 	print "\n========== RUN get_rcb.py ============"
 	util.logNow("START AT")
 	
-	hyip_scope.run()
-	hyip_tank.run()
-	hyip_stop.run()
-	my_hyip.run()
-	gs_monitor.run()
-	hyip_income.run()
+	hyip_scope.run()	
+	my_hyip.run()	
 	invest_tracing.run()
 	my_invest_blog.run()
+	hyip_cruiser_com.run()
+	gs_monitor.run()	
+	hyip_income.run()
+	hyip_tank.run()	
+	hyip_stop.run()
 	
 	util.logNow("END AT")
 

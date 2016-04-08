@@ -13,6 +13,8 @@ import hyip_income
 import invest_tracing
 import my_invest_blog
 import hyip_cruiser_com
+import bloghyip_com
+import goodhyip_biz
 	
 def main():	
 	print "\n========== RUN get_rcb.py ============"
@@ -27,6 +29,8 @@ def main():
 	hyip_income.run()
 	hyip_tank.run()	
 	hyip_stop.run()
+	bloghyip_com.run()
+	goodhyip_biz.run()
 	
 	util.logNow("END AT")
 

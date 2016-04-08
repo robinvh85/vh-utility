@@ -11,7 +11,6 @@ import util
 import webflipfunds_com
 import custommining_com
 import unitedswissbanks_com
-import fxprofit_biz
 import managerhourly_com
 import nanoproinvest_com
 import bitcoinnetworks_biz
@@ -22,16 +21,16 @@ import depdun_com
 import paragoninvest_biz
 import bullair_biz
 import oktrade_biz
+import lucrativeventure_co
+import coiner_biz
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
 	util.logNow("START AT")
-	
-	oktrade_biz.run()
+		
 	webflipfunds_com.run()
 	custommining_com.run()
 	unitedswissbanks_com.run()
-	fxprofit_biz.run()
 	managerhourly_com.run()
 	nanoproinvest_com.run()
 	bitcoinnetworks_biz.run()
@@ -41,6 +40,9 @@ def main():
 	depdun_com.run()
 	paragoninvest_biz.run()
 	bullair_biz.run()	
+	oktrade_biz.run()
+	lucrativeventure_co.run()
+	coiner_biz.run()
 	
 	util.logNow("END AT")
 

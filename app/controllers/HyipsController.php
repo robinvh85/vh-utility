@@ -5,11 +5,36 @@ class HyipsController extends ControllerBase
 	public function initialize()
 	{
 		$this->tag->setTitle("Web page");
+		if(!$this->session->get("username")){
+			$this->response->redirect('/');
+		}
 	}
+	
+	public function test1Action()
+    {
+		$this->view->disable();
+		
+		if($this->session->get("test"))
+			echo $this->session->get("test");
+		else
+			echo "NG";	
+    }
+	
+	public function test2Action()
+    {
+		$this->session->set("test", "test2");
+		
+		$this->view->disable();
+		
+		if($this->session->get("test"))
+			echo $this->session->get("test");
+		else
+			echo "NG";
+    }
 	
     public function indexAction()
     {
-		
+		 $this->session->get("test");
     }
 
 	public function index2Action()
@@ -119,6 +144,19 @@ class HyipsController extends ControllerBase
 				$account->amount += $params->amount;
 				$account->save();
 			}
+            echo json_encode(array("status" => "OK"));
+        } else {
+            echo json_encode(array("status" => "NG"));
+        }
+    }
+	
+	public function deleteInvestAction()
+    {
+        $this->view->disable();
+		$params = json_decode(file_get_contents('php://input'));
+        $model = SiteInvests::findFirst($params->id);      
+		
+        if($model->delete()){			
             echo json_encode(array("status" => "OK"));
         } else {
             echo json_encode(array("status" => "NG"));

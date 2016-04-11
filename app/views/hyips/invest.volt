@@ -54,8 +54,8 @@
 		<select ng-model='item.status' ng-change="updateInvest(item)">
 			<option ng-repeat="status in statusList" ng-value="status">[[ status ]]</option>
 		</select>
-		</td>
-		<td></td>
+		<button class="btn btn-primary btn-sm" ng-click="deleteInvest(item)">Delete</button>
+		</td>		
 	</tr>
 	</tbody>	
 </table>

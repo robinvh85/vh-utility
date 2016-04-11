@@ -45,7 +45,7 @@
 		<td><input type="text" ng-model="item.score" style="width:40px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
-		- <a href="https://www.google.com/#q=[[ item.url ]]" target="_blank">Google</a>
+		- <a href="https://www.google.com/#q=[[ item.url ]] talkgold" target="_blank">Google</a>
 		</td>
 		<td><input type="checkbox" ng-model="item.is_stat" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>
 		<td>

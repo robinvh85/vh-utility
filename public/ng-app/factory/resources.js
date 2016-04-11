@@ -64,6 +64,10 @@ angular.module("app").factory("resources", function($resource) {
 	  updateInvest : {
         method: "POST",
 		url: apiUrl + "/hyips/updateInvest"
+      },
+	  deleteInvest : {
+        method: "POST",
+		url: apiUrl + "/hyips/deleteInvest"
       }
     }),
 	accounts: $resource(apiUrl + "/account/list", {}, {

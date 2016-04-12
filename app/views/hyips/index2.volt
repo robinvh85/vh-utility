@@ -45,7 +45,8 @@
 		<td><input type="text" ng-model="item.score" style="width:40px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
-		- <a href="https://www.google.com/#q=[[ item.url ]] talkgold" target="_blank">Google</a>
+		- <a href="https://www.google.com/#q=[[ item.url ]] talkgold" target="_blank">Go</a>
+		- <a href="http://allmonitors.net/hyip/[[ item.url ]]/" target="_blank">Mo</a>
 		</td>
 		<td><input type="checkbox" ng-model="item.is_stat" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>
 		<td>
@@ -73,7 +74,10 @@
 		</tr>		
 		<tr>
 			<td></td>
-			<td><input type="text" ng-model="newItem.url" class="form-control input-sm" /></td>
+			<td>
+				<input type="text" ng-model="newItem.url" class="form-control input-sm" style="width:150px;"/>
+				<input type="text" ng-model="newItem.ref_site_url" class="form-control input-sm" />
+			</td>
 			<td>
 				<input type="text" ng-model="newItem.monitor" class="form-control input-sm" placeholder="Monitor" style="width:120px; display:inherit;"/>
 				<input type="text" ng-model="newItem.ref_site_id" class="form-control input-sm" placeholder="ID" style="width:80px; display:inherit;"/>
@@ -84,7 +88,7 @@
 	</thead>
 	<tr ng-repeat="item in itemUnknowList" >
 		<td>[[ $index + 1 ]]</td>
-		<td><a href="[[ item.url ]]" target="_blank">[[ item.url ]]</a></td>
+		<td><a href="[[ item.url ]]" target="_blank">[[ item.url ]]</a><a href="#" style="margin-left:10px;" ng-click="newItem.ref_site_url=item.url; newItem.monitor=item.monitor;"><span class="glyphicon glyphicon-plus"></span></a></td>
 		<td>[[ item.monitor ]]</td>
 		<td style="text-align:center;"><input type="checkbox" ng-model="item.is_done" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateUnknowSite(item)"/></td>
 		<td></td>

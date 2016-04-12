@@ -181,7 +181,7 @@ class HyipsController extends ControllerBase
 		$monitorModel->site_id = $model->id;
 		$monitorModel->monitor = $params -> monitor;
 		$monitorModel->ref_site_id = $params -> ref_site_id;
-		$monitorModel->ref_site_url = SiteMonitors::getRcbLink($params->monitor, $params->ref_site_id);
+		$monitorModel->ref_site_url = $params -> ref_site_url; //SiteMonitors::getRcbLink($params->monitor, $params->ref_site_id);
 		
 		if(!$monitorModel->save()){
 			$status = "NG";

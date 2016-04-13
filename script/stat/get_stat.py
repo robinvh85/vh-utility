@@ -23,6 +23,9 @@ import bullair_biz
 import oktrade_biz
 import lucrativeventure_co
 import coiner_biz
+import robloxfunds_com
+import pairmoney_com
+import effective_fund_com
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -43,6 +46,9 @@ def main():
 	oktrade_biz.run()
 	lucrativeventure_co.run()
 	coiner_biz.run()
+#	robloxfunds_com.run()
+	pairmoney_com.run()
+#	effective_fund_com.run()
 	
 	util.logNow("END AT")
 

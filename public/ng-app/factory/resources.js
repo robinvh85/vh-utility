@@ -18,6 +18,16 @@ angular.module("app").factory("resources", function($resource) {
         url: apiUrl + "/words/create"
       },
     }),
+	talks: $resource(apiUrl + "/talks/list", {}, {
+      list: {
+        method: "POST",
+		url: apiUrl + "/talks/list"
+      },
+	  listLesson: {
+        method: "POST",
+		url: apiUrl + "/talks/listLesson"
+      },	
+    }),
 	hyips: $resource(apiUrl + "/hyips/list", {}, {
       list: {
         method: "POST",
@@ -64,6 +74,10 @@ angular.module("app").factory("resources", function($resource) {
 	  updateInvest : {
         method: "POST",
 		url: apiUrl + "/hyips/updateInvest"
+      },
+	  deleteInvest : {
+        method: "POST",
+		url: apiUrl + "/hyips/deleteInvest"
       }
     }),
 	accounts: $resource(apiUrl + "/account/list", {}, {

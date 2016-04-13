@@ -47,6 +47,11 @@ angular.module("app").controller("HyipIndex2Ctrl", function($scope, $timeout, $i
 	
 	
 	$scope.addNewItem = function(){
+		
+		if($scope.newItem.url == "" || $scope.newItem.ref_site_url == ""){
+			return;
+		}
+		
 		resources.hyips.create($scope.newItem).$promise.then(function(res) {
 			console.log("Updated Site", res);
 			

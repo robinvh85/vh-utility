@@ -8,6 +8,19 @@ class IndexController extends ControllerBase
         
     }
 	
+	public function loginAction()
+    {
+		$this->view->disable();
+		
+        if($this->request->getQuery('name') == 'invest'){
+			$this->session->set("username", "invest");
+			echo "OK";
+		} else
+		{
+			$this->response->redirect('/');
+		}				
+    }
+	
 	public function listAction()
     {
         $this->view->disable();

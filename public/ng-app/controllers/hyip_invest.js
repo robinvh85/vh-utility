@@ -27,6 +27,15 @@ angular.module("app").controller("HyipInvestCtrl", function($scope, $window, $ti
 		});	
 	}
 	
+	$scope.deleteInvest = function(item){
+		resources.hyips2.deleteInvest(item).$promise.then(function(res) {	
+			if(res.status == "OK"){
+				refreshData($scope.siteId);
+				console.log("Update success");
+			}
+		});	
+	}
+	
 	function refreshData(site_id){
 		console.log("refreshData()");
 		var params = {	

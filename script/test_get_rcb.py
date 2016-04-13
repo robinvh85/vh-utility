@@ -4,13 +4,13 @@ import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "lib")))
 import util
 import mysql
-import list4hyip_com
+import invest_tracing
 	
 def main():	
 	print "\n========== RUN test_get_rcb.py ============"
 	util.logNow("START AT")
 	
-	list4hyip_com.run()
+	invest_tracing.run()
 	
 	util.logNow("END AT")
 

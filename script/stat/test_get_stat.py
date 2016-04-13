@@ -7,14 +7,14 @@ import common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib")))
 import mysql
 import util
-import effective_fund_com
+import vertexasset_com
 
 
 def main():	
 	print "\n========== RUN test_get_stat.py ============"
 	util.logNow("START AT")
 	
-	effective_fund_com.run()
+	vertexasset_com.run()
 	
 	util.logNow("END AT")
 

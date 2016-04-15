@@ -47,6 +47,7 @@
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]] talkgold" target="_blank">Go</a>
 		- <a href="http://allmonitors.net/hyip/[[ item.url ]]/" target="_blank">Mo</a>
+		- <a href="http://investorsstartpage.com/check/d/[[ item.url ]]/" target="_blank">ST</a>		
 		</td>
 		<td><input type="checkbox" ng-model="item.is_stat" ng-true-value="'1'" ng-false-value="'0'" ng-change="updateSite(item)"/></td>
 		<td>

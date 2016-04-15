@@ -32,7 +32,7 @@ def main():
 	gs_monitor.run()	
 	hyip_income.run()
 	hyip_tank.run()	
-	hyip_stop.run()
+#	hyip_stop.run()
 	bloghyip_com.run()
 	goodhyip_biz.run()	
 	

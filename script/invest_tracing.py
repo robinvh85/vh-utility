@@ -37,11 +37,11 @@ def getRcb(monitor):
 	
 	rcb_url = "http://{0}/newadd.html".format(monitor)
 	d = pq(url=rcb_url)
-	tables = d(".listbody tr td .pro")
+	tables = d(".listbody tr td[width='28%'] .pro")
 	siteList = []
 	
 	for index, item in enumerate(tables):
-		if index % 6 == 0 and index < len(tables) - 6 and item.get("href") != None:
+		try:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
 			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
@@ -54,6 +54,8 @@ def getRcb(monitor):
 				
 				siteList.append(obj)
 				print("{0} - {1} - {2}".format(obj['id'], obj['url'], obj['siteId']))
+		except:
+			pass
 				
 	for item in siteList:
 		common.insertSiteMonitor(item, monitor)

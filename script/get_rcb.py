@@ -34,7 +34,7 @@ def main():
 	hyip_tank.run()	
 #	hyip_stop.run()
 	bloghyip_com.run()
-	goodhyip_biz.run()	
+#	goodhyip_biz.run()	
 	
 	util.logNow("END AT")
 

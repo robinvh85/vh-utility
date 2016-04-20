@@ -69,6 +69,17 @@ CREATE TABLE `accounts` (
   UNIQUE KEY `idx_name` (`name`)
 ) DEFAULT CHARSET=utf8;
 
+CREATE TABLE `user_rcb` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` int(11) DEFAULT NULL,
+  `monitor` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time` timestamp NULL DEFAULT NULL,
+  `user` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `deposit` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_rcb` (`site_id`,`time`,`user`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 

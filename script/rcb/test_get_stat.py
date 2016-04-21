@@ -7,12 +7,12 @@ import common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib")))
 import mysql
 import util
-import invest_tracing
+import hyip_cruiser
 def main():	
 	print "\n========== RUN test_get_stat.py ============"
 	util.logNow("START AT")
 	
-	invest_tracing.run()
+	hyip_cruiser.run()
 	util.logNow("END AT")
 
 ############## Main #############

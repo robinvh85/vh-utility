@@ -13,8 +13,11 @@ import invest_tracing
 def main():	
 	print "\n========== RUN get_stat.py ============"
 	util.logNow("START AT")
-		
-	invest_tracing.run()
+	
+	rcb_list = common.getRcbSites()
+	for item in rcb_list:
+		if item[2] == "invest-tracing.com":
+			invest_tracing.run(item)
 	
 	util.logNow("END AT")
 

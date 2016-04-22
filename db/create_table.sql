@@ -73,14 +73,23 @@ CREATE TABLE `user_rcb` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `site_id` int(11) DEFAULT NULL,
   `monitor` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `time` timestamp NULL DEFAULT NULL,
+  `time` datetime NULL DEFAULT NULL,
   `user` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `deposit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_user_rcb` (`site_id`,`time`,`user`)
+  KEY `idx_time` (`time`),
+  KEY `idx_site_id` (`site_id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
+CREATE TABLE `user_rcb_daily` (
+  `date` date NOT NULL,
+  `site_id` int(11) NOT NULL,
+  `monitor` varchar(100) NOT NULL,
+  `count` int(11) DEFAULT NULL,
+  `deposit` int(11) DEFAULT NULL,
+  PRIMARY KEY (`date`,`site_id`,`monitor`)
+) DEFAULT CHARSET=utf8;
 
 
 

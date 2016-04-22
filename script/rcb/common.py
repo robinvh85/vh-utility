@@ -7,21 +7,47 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib"
 import util
 import mysql
 
-def dateStringToTimestamp(dateString, format = '%Y-%m-%d %H:%M:%S'):
+def dateStringToTimestamp(dateString, timezone=0, format = '%Y-%m-%d %H:%M:%S'):
+	print("Date: ", dateString)
 	obj = datetime.strptime(dateString, format)
-	return long(time.mktime(obj.timetuple())) * 1000
-
+	return (long(time.mktime(obj.timetuple())) - timezone*86400 ) * 1000
+ 
+def formatTimestamp(timestamp, format=None):
+    result = ""    
+    length = len(str(timestamp))    
+    
+    if format == None:
+        format = "%Y-%m-%d %H:%M:%S"
+    
+    if length > 10:    
+        div = pow(10, length - 10)
+        timestamp = timestamp / div    
+    
+    result = datetime.fromtimestamp(timestamp).strftime(format)
+    
+    return result;
+	
 def removeNumberString(dateString):
 	dateString = dateString.replace("st,", "")
 	dateString = dateString.replace("nd,", "")
 	dateString = dateString.replace("rd,", "")
 	dateString = dateString.replace("th,", "")
 	return dateString
-	
-def insertSiteStat(obj):
+
+def getRcbSites():
 	query = """
-		INSERT INTO site_stats(site_id, total_account, active_account, total_deposit, total_withdraw, time) values ({0}, {1}, {2}, {3}, {4}, {5})
-	""".format(obj['site_id'], obj['total_account'], obj['active_account'], obj['total_deposit'], obj['total_withdraw'], obj['time'])
+		 select s.id, s.url, sm.monitor, sm.ref_site_url 
+		 from sites s 
+		 join site_monitor sm ON sm.site_id = s.id 
+		 where s.is_stat = 1 AND s.is_scam=0
+	"""
+	
+	return mysql.executeQuery(query)
+	
+def insertUserRcb(obj):
+	query = """
+		INSERT INTO user_rcb(site_id, monitor, time, user, deposit) values ({0}, '{1}', '{2}', '{3}', {4})
+	""".format(obj['site_id'], obj['monitor'], obj['time'], obj['user'], obj['deposit'])
 	
 	return mysql.executeNoneQuery(query)
 	

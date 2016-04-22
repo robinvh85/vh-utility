@@ -4,37 +4,35 @@ from pyquery import PyQuery as pq
 import time
 import common
 
-def getValues(url):
-	print("getValues() 11")
-	
-	url = "http://www.invest-tracing.com/{0}".format(url)	
+def getValues(item):
+	url = item[3]
+	print("getValues(): ", url)
 	
 	d = pq(url=url)
-	print("URL: " + url)
-	
 	list = d("[border='0'].listbody td")	
-	
-	#list = d(".listbody td")	
-	
-	print("LIST: ", len(list))
-	
+
 	index = 20
-	while index < len(list):				
+	while index < len(list):	
+		#try :
 		obj = {}
 		obj['date'] = list[index].text_content()
 		obj['time'] = common.dateStringToTimestamp(obj['date'])
+		obj['time'] = common.formatTimestamp(obj['time'])
 		obj['user'] = list[index + 1].text_content()
 		obj['deposit'] = list[index + 2].text_content().split("/")[0].replace("$", "")
-		
-		print("{0} - {1} - {2} - {3}".format(obj['date'], obj['time'], obj['user'], obj['deposit']))		
+		obj['site_id'] = item[0]
+		obj['monitor'] = item[2]				
+			
+		print("{0} - {1} - {2} - {3} - {4} - {5}".format(obj['site_id'], obj['monitor'], obj['date'], obj['time'], obj['user'], obj['deposit']))
+		common.insertUserRcb(obj)
+		#except Exception:
+		#	pass		
 		index += 5
-	
-	#common.insertSiteStat(obj)
 
-def run():	
+def run(item):	
 	print "\n========== RUN invest_tracing.run() ============"
 #	try :
-	getValues("rcb-Currency-Trader.html")
+	getValues(item)
 #	except Exception:
 #		pass
 	

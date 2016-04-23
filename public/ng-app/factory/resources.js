@@ -94,5 +94,11 @@ angular.module("app").factory("resources", function($resource) {
 		url: apiUrl + "/accounts/update"
       }
     }),
+	stats: $resource(apiUrl + "/stats/listRcb", {}, {
+      listRcb: {
+        method: "POST",
+		url: apiUrl + "/stats/listRcb"
+      }
+    }),
   };
 });

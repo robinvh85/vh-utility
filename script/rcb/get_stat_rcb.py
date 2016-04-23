@@ -9,6 +9,7 @@ import mysql
 import util
 
 import invest_tracing
+import hyip_cruiser
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -18,6 +19,8 @@ def main():
 	for item in rcb_list:
 		if item[2] == "invest-tracing.com":
 			invest_tracing.run(item)
+		else if item[2] == "hyip-cruiser.com"
+			hyip_cruiser.run(item)
 	
 	util.logNow("END AT")
 
@@ -29,6 +32,3 @@ mysql.connect()
 main()
 
 mysql.disconnect()
-
-
-

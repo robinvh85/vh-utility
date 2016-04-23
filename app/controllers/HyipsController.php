@@ -45,13 +45,13 @@ class HyipsController extends ControllerBase
 	
 	public function investAction()
     {
-		$site_id = $this->request->getQuery('site_id');			
+		$site_id = $this->request->getQuery('site_id');	
 		$this->view->site_id = $site_id;
     }
 	
 	public function statAction()
     {
-		$site_id = $this->request->getQuery('site_id');	
+		$site_id = $this->request->getQuery('site_id');
 		
 		$site = Sites::findFirst($site_id);
 		

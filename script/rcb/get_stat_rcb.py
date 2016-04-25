@@ -17,11 +17,15 @@ def main():
 	
 	rcb_list = common.getRcbSites()
 	for item in rcb_list:
+		print("=========> PAGE: ", item[1])
 		if item[2] == "invest-tracing.com":
 			invest_tracing.run(item)
-		else if item[2] == "hyip-cruiser.com"
+		elif item[2] == "hyip-cruiser.com":
 			hyip_cruiser.run(item)
+		elif item[2] == "hyipscope.org"
+			hyipscope.run(item)
 	
+	common.statsRcbDaily()
 	util.logNow("END AT")
 
 ############## Main #############

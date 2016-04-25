@@ -10,6 +10,8 @@ import util
 
 import invest_tracing
 import hyip_cruiser
+import hyipscope
+import graspgold
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -17,11 +19,17 @@ def main():
 	
 	rcb_list = common.getRcbSites()
 	for item in rcb_list:
+		print("=========> PAGE: ", item[1])
 		if item[2] == "invest-tracing.com":
 			invest_tracing.run(item)
-		else if item[2] == "hyip-cruiser.com"
+		elif item[2] == "hyip-cruiser.com":
 			hyip_cruiser.run(item)
+		elif item[2] == "hyipscope.org":
+			hyipscope.run(item)
+		elif item[2] == "graspgold.com":
+			graspgold.run(item)
 	
+	common.statsRcbDaily()
 	util.logNow("END AT")
 
 ############## Main #############

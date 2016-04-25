@@ -12,7 +12,6 @@ import unitedswissbanks_com
 import depdun_com
 import oktrade_biz
 import lucrativeventure_co
-import coiner_biz
 import pairmoney_com
 import effective_fund_com
 import vertexasset_com
@@ -25,7 +24,6 @@ def main():
 	depdun_com.run()	
 	oktrade_biz.run()
 	lucrativeventure_co.run()
-	coiner_biz.run()
 	pairmoney_com.run()
 	vertexasset_com.run()
 	

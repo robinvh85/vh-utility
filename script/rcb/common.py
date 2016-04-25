@@ -8,7 +8,7 @@ import util
 import mysql
 
 def dateStringToTimestamp(dateString, timezone=0, format = '%Y-%m-%d %H:%M:%S'):
-	print("Date: ", dateString)
+	#print("Date: ", dateString)
 	obj = datetime.strptime(dateString, format)
 	return (long(time.mktime(obj.timetuple())) - timezone*86400 ) * 1000
  
@@ -60,7 +60,7 @@ def getSiteId(url):
 	
 def statsRcbDaily():
 	query = """
-		INSERT IGNORE INTO user_rcb_daily(date, site_id, monitor, count, deposit)
+		REPLACE INTO user_rcb_daily(date, site_id, monitor, count, deposit)
 		SELECT DATE(time), site_id, monitor, COUNT(*) as count, SUM(deposit) as deposit 
 		FROM user_rcb
 		GROUP BY DATE(time), site_id, monitor

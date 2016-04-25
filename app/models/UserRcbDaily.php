@@ -39,4 +39,15 @@ class UserRcbDaily extends ModelBase
         $list = self::getManager()->executeQuery($phql);
         return $list;
     }
+	
+	public static function getListTotalBySiteId($site_id){
+        $phql = "SELECT date, SUM(count) as count, SUM(deposit) as deposit 
+		FROM UserRcbDaily 
+		WHERE site_id=$site_id
+		GROUP BY date
+		ORDER BY date DESC";
+        
+		$list = self::getManager()->executeQuery($phql);
+        return $list;
+    }
 }

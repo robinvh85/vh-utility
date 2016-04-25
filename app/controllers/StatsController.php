@@ -26,4 +26,12 @@ class StatsController extends ControllerBase
         $this->view->disable();
         echo json_encode(array("data" => $list->toArray()));
 	}
+	
+	public function listRcbTotalAction(){
+		$params = json_decode(file_get_contents('php://input'));
+		$list = UserRcbDaily::getListTotalBySiteId($params->site_id);	
+		
+        $this->view->disable();
+        echo json_encode(array("data" => $list->toArray()));
+	}
 }

@@ -57,7 +57,7 @@ def getSiteMonitorByRefSiteId(monitor, refSiteId):
 	query = """
 		SELECT ref_site_url
 		FROM site_monitor
-		WHERE monitor='{0}' AND ref_site_id={1}
+		WHERE monitor='{0}' AND ref_site_id='{1}'
 	""".format(monitor, refSiteId)
 	
 	return mysql.executeScalar(query)

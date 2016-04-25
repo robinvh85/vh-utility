@@ -98,6 +98,10 @@ angular.module("app").factory("resources", function($resource) {
       listRcb: {
         method: "POST",
 		url: apiUrl + "/stats/listRcb"
+      },
+	  listRcbTotal: {
+        method: "POST",
+		url: apiUrl + "/stats/listRcbTotal"
       }
     }),
   };

@@ -45,6 +45,7 @@
 		<td><input type="text" ng-model="item.score" style="width:40px" class="form-control input-sm" ng-blur="updateSite(item)" /></td>
 		<td><a href="http://[[ item.url ]]" target="_blank">[[ item.url ]]</a>
 		- <a href="/hyips/stat?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">Stat</a>
+		- <a href="/stats/rcb?site_id=[[ item.id ]]" ng-show="item.is_stat == 1" target="_blank">RCB</a>
 		- <a href="https://www.google.com/#q=[[ item.url ]] talkgold" target="_blank">Go</a>
 		- <a href="http://allmonitors.net/hyip/[[ item.url ]]/" target="_blank">Mo</a>
 		- <a href="http://investorsstartpage.com/check/d/[[ item.url ]]/" target="_blank">ST</a>		

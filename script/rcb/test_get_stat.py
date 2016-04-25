@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib"
 import mysql
 import util
 
-import hyipscope
+import graspgold
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -16,8 +16,9 @@ def main():
 	
 	rcb_list = common.getRcbSites()
 	for item in rcb_list:
-		if item[2] == "hyipscope.org":
-			hyipscope.run(item)
+
+		if item[2] == "graspgold.com":
+			graspgold.run(item)
 	
 	common.statsRcbDaily()
 	util.logNow("END AT")

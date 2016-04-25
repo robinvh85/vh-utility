@@ -10,6 +10,8 @@ import util
 
 import invest_tracing
 import hyip_cruiser
+import hyipscope
+import graspgold
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -22,8 +24,10 @@ def main():
 			invest_tracing.run(item)
 		elif item[2] == "hyip-cruiser.com":
 			hyip_cruiser.run(item)
-		elif item[2] == "hyipscope.org"
+		elif item[2] == "hyipscope.org":
 			hyipscope.run(item)
+		elif item[2] == "graspgold.com":
+			graspgold.run(item)
 	
 	common.statsRcbDaily()
 	util.logNow("END AT")

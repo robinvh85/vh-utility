@@ -8,9 +8,8 @@ import common
 
 def getId(url):
 	print("=====> ", url)
-	arr = url.split("-")
-	arr1 = arr[1].split(".")
-	id = arr1[0]
+	arr = url.split("/")
+	id = arr[len(arr) - 2]
 	return id
 
 def getSiteUrl(id, monitor, rcbUrl):
@@ -33,18 +32,18 @@ def getSiteUrl(id, monitor, rcbUrl):
 	return result
 
 def getRcb(monitor):
-	print("invest_tracing.getRcb()")
+	print("graspgold.getRcb()")
 	
-	rcb_url = "http://{0}/newadd.html".format(monitor)
+	rcb_url = "http://{0}/new/".format(monitor)
 	d = pq(url=rcb_url)
-	tables = d(".listbody tr td[width='28%'] .pro")
+	tables = d(".new_site a")
 	siteList = []
 	
 	for index, item in enumerate(tables):
 		try:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
-			obj['siteRCBUrl'] = "http://{0}/rcb-{1}.html".format(monitor, obj['id'])
+			obj['siteRCBUrl'] = "http://{0}/refback/lid/{1}/".format(monitor, obj['id'])
 			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
@@ -61,6 +60,6 @@ def getRcb(monitor):
 		common.insertSiteMonitor(item, monitor)
 	
 def run():
-	MONITOR = "invest-tracing.com"
+	MONITOR = "graspgold.com"
 	getRcb(MONITOR)
 

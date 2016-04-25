@@ -17,7 +17,8 @@ import bloghyip_com
 import goodhyip_biz
 import list4hyip_com
 import hyipdollar_com
-	
+import graspgold
+
 def main():	
 	print "\n========== RUN get_rcb.py ============"
 	util.logNow("START AT")
@@ -28,6 +29,7 @@ def main():
 	my_invest_blog.run()
 	list4hyip_com.run()
 	hyip_cruiser_com.run()
+	graspgold.run()
 	hyipdollar_com.run()
 	gs_monitor.run()	
 	hyip_income.run()

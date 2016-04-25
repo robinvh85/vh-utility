@@ -26,7 +26,7 @@ def getSiteUrl(urlRequest, monitor, rcbUrl):
 		result = result.split("/")[0]
 	except :
 		print("========== ERROR ===========")
-		common.insertUnknowSite(rcbUrl, monitor)
+		#common.insertUnknowSite(rcbUrl, monitor)
 	
 	return result
 

@@ -7,12 +7,12 @@ import common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib")))
 import mysql
 import util
-import rioze_com
+import oilenergy
 def main():	
 	print "\n========== RUN test_get_stat.py ============"
 	util.logNow("START AT")
 	
-	rioze_com.run()
+	oilenergy.run()
 	util.logNow("END AT")
 
 ############## Main #############

@@ -3,7 +3,8 @@ import os.path
 import urllib2
 import re
 from pyquery import PyQuery as pq
-
+import subprocess
+import requests
 import common
 
 def getId(url):
@@ -12,12 +13,25 @@ def getId(url):
 	
 	return id
 
+def getSiteUrl1(urlRequest, monitor, rcbUrl):
+	urlRequest = "http://{0}{1}".format(monitor, urlRequest)
+	
+	#obj = subprocess.call(['curl', '-i', '-H', '"Accept: application/xml"', '-u', 'login:key', '"{0}"'.format(urlRequest)])
+	
+	res = requests.get(urlRequest)
+	
+#	subp = subprocess.Popen(['curl', '-O', urlRequest], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#	curlstdout, curlstderr = subp.communicate()
+#	op = str(curlstdout)
+	print("======> ", res.text)
+#	print(op)
+	
 def getSiteUrl(urlRequest, monitor, rcbUrl):
 	result = ""
 	urlRequest = "http://{0}{1}".format(monitor, urlRequest)
 	print("REQUEST: {0}".format(urlRequest))
 	#try:
-	req = urllib2.urlopen(urlRequest, timeout=30)
+	req = urllib2.urlopen(urlRequest)
 	url = req.geturl()
 	print("URL: ", url)
 	arr = url.split("/?")
@@ -45,7 +59,7 @@ def getRcb(monitor):
 
 		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:
 			obj['siteRCBUrl'] = "http://{0}/referral/{1}/".format(monitor, obj['id'])
-			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
+			obj['url'] = getSiteUrl1(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
 			if obj['url'] != '':

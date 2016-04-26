@@ -12,9 +12,8 @@ import unitedswissbanks_com
 import depdun_com
 import oktrade_biz
 import lucrativeventure_co
-import pairmoney_com
-import effective_fund_com
-import vertexasset_com
+import becomerich
+import oilenergy
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -24,8 +23,8 @@ def main():
 	depdun_com.run()	
 	oktrade_biz.run()
 	lucrativeventure_co.run()
-	pairmoney_com.run()
-	vertexasset_com.run()
+	becomerich.run()
+	oilenergy.run()
 	
 	util.logNow("END AT")
 

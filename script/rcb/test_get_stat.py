@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../lib"
 import mysql
 import util
 
-import hyipdollar
+import makeindmoney
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -17,8 +17,8 @@ def main():
 	rcb_list = common.getRcbSites()
 	for item in rcb_list:
 
-		if item[2] == "hyipdollar.com":
-			hyipdollar.run(item)
+		if item[2] == "makeindmoney.com":
+			makeindmoney.run(item)
 	
 	common.statsRcbDaily()
 	util.logNow("END AT")

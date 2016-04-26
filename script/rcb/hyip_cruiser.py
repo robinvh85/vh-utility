@@ -25,7 +25,8 @@ def getValues(item):
 			obj['monitor'] = item[2]
 			
 			print("{0} - {1} - {2} - {3} - {4} - {5}".format(obj['site_id'], obj['monitor'], obj['date'], obj['time'], obj['user'], obj['deposit']))
-			common.insertUserRcb(obj)
+			if common.insertUserRcb(obj) == -1:
+				return
 		except Exception:
 			pass
 		index += 5

@@ -18,6 +18,7 @@ import goodhyip_biz
 import list4hyip_com
 import hyipdollar_com
 import graspgold
+import makeindmoney
 import monhyip
 
 def main():	
@@ -31,7 +32,8 @@ def main():
 	list4hyip_com.run()
 	hyip_cruiser_com.run()
 	graspgold.run()
-	monhyip.run()
+	makeindmoney.run()
+	
 	hyipdollar_com.run()
 	gs_monitor.run()	
 	hyip_income.run()
@@ -39,6 +41,7 @@ def main():
 #	hyip_stop.run()
 	bloghyip_com.run()
 #	goodhyip_biz.run()	
+	#monhyip.run()
 	
 	util.logNow("END AT")
 

@@ -20,6 +20,7 @@ import hyipdollar_com
 import graspgold
 import makeindmoney
 import monhyip
+import uhyips
 
 def main():	
 	print "\n========== RUN get_rcb.py ============"
@@ -37,6 +38,7 @@ def main():
 	hyipdollar_com.run()
 	gs_monitor.run()	
 	hyip_income.run()
+	uhyips.run()
 	hyip_tank.run()	
 #	hyip_stop.run()
 	bloghyip_com.run()

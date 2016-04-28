@@ -19,7 +19,6 @@ import list4hyip_com
 import hyipdollar_com
 import graspgold
 import makeindmoney
-import monhyip
 import uhyips
 
 def main():	

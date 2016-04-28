@@ -13,19 +13,6 @@ def getId(url):
 	
 	return id
 
-def getSiteUrl1(urlRequest, monitor, rcbUrl):
-	urlRequest = "http://{0}{1}".format(monitor, urlRequest)
-	
-	#obj = subprocess.call(['curl', '-i', '-H', '"Accept: application/xml"', '-u', 'login:key', '"{0}"'.format(urlRequest)])
-	
-	res = requests.get(urlRequest)
-	
-#	subp = subprocess.Popen(['curl', '-O', urlRequest], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-#	curlstdout, curlstderr = subp.communicate()
-#	op = str(curlstdout)
-	print("======> ", res.text)
-#	print(op)
-	
 def getSiteUrl(urlRequest, monitor, rcbUrl):
 	result = ""
 	urlRequest = "http://{0}{1}".format(monitor, urlRequest)
@@ -59,7 +46,7 @@ def getRcb(monitor):
 
 		if common.getSiteMonitorByRefSiteId(monitor, obj['id']) == None:
 			obj['siteRCBUrl'] = "http://{0}/referral/{1}/".format(monitor, obj['id'])
-			obj['url'] = getSiteUrl1(item.get("href"), monitor, obj['siteRCBUrl'])
+			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				
 			if obj['url'] != '':

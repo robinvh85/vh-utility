@@ -28,7 +28,7 @@
 	<tr ng-repeat="item in itemList">
 		<td>[[ $index + 1 ]]</td>
 		<td>[[ item.date ]]</td>
-		<td>[[ item.monitor ]]</td>
+		<td><a href="[[ item.ref_site_url ]]" target="_blank">[[ item.monitor ]]</a></td>		
 		<td>[[ item.count ]]</td>
 		<td>[[ item.deposit ]]</td>
 	</tr>

@@ -14,7 +14,7 @@ def getId(url):
 
 def getSiteUrl(id, monitor, rcbUrl):
 	result = ""	
-	urlRequest = "http:/{0}{1}".format(monitor, id)
+	urlRequest = "http://{0}{1}".format(monitor, id)
 	print("REQUEST: {0}".format(urlRequest))
 	try:
 		req = urllib2.urlopen(urlRequest, timeout=30)

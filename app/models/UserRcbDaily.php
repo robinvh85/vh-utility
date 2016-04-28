@@ -35,7 +35,11 @@ class UserRcbDaily extends ModelBase
     }
 	
 	public static function getListBySiteId($site_id){
-        $phql = "SELECT * FROM UserRcbDaily WHERE site_id=$site_id ORDER BY date DESC";
+        $phql = "SELECT u.date, u.count, u.deposit, u.monitor, sm.ref_site_url FROM UserRcbDaily u			
+			JOIN SiteMonitors sm ON sm.monitor = u.monitor AND sm.site_id = u.site_id
+			WHERE u.site_id=$site_id 
+			ORDER BY u.date DESC";
+			
         $list = self::getManager()->executeQuery($phql);
         return $list;
     }

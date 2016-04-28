@@ -43,7 +43,7 @@ def getRcb(monitor):
 		try:
 			obj = {}
 			obj['id'] = getId(item.get("href"))
-			obj['siteRCBUrl'] = "http://{0}/refback/lid/{1}/".format(monitor, obj['id'])
+			obj['siteRCBUrl'] = "http://{0}/rcbrequest?lid={1}".format(monitor, obj['id'])
 			obj['url'] = getSiteUrl(item.get("href"), monitor, obj['siteRCBUrl'])
 			obj['siteId'] = ""
 				

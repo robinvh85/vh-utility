@@ -15,6 +15,8 @@ import graspgold
 import myhyips
 import hyipdollar
 import makeindmoney
+import myinvestblog
+import uhyips
 
 def main():	
 	print "\n========== RUN get_stat.py ============"
@@ -37,6 +39,10 @@ def main():
 			hyipdollar.run(item)
 		elif item[2] == "makeindmoney.com":
 			makeindmoney.run(item)
+		elif item[2] == "myinvestblog.ru":
+			myinvestblog.run(item)
+		elif item[2] == "uhyips.com":
+			uhyips.run(item)
 		
 	common.statsRcbDaily()
 	util.logNow("END AT")
